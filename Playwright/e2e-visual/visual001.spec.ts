@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+//import { delay } from '../helpers'
 
 test.describe("Visual Regression YouLend Page", () => {
 
@@ -98,8 +99,8 @@ test.describe("Visual Regression YouLend Page", () => {
         await page.goto('https://youlend.com/')
 
         //Seeking Funding button Visual Test
-        const company = page.locator('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button')
-        expect(await company.screenshot()).toMatchSnapshot('YL-SeekingFunding.png');
+        const seeking = page.locator('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button')
+        expect(await seeking.screenshot()).toMatchSnapshot('YL-SeekingFunding.png');
 
         //Checking Seeking Funding Page Visual Test
         await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button')
@@ -112,13 +113,18 @@ test.describe("Visual Regression YouLend Page", () => {
         await page.goto('https://youlend.com/')
 
         //Company button Visual Test
-        const company = page.locator('body > main > div.section.inner-hero > div > div > div.inner-hero-content > div')
-        expect(await company.screenshot()).toMatchSnapshot('YL-Book-a-Demo.png');
+        const book = page.locator('body > main > div.section.hero > div > div > div.hero-content > div')
+        expect(await book.screenshot()).toMatchSnapshot('YL-Book-a-Demo.png');
 
         //Company dropdown Visual Test
-        await page.click('body > main > div.section.inner-hero > div > div > div.inner-hero-content > div')
-        const companyDrop = page.locator('body > div.popup-modal > div')
-        expect(await companyDrop.screenshot()).toMatchSnapshot('YL-Book-a-Demo-Popup.png');
+        await page.click('body > main > div.section.hero > div > div > div.hero-content > div')
+        const bookPage = page.locator('body > div.popup-modal > div')
+
+        //? Force wait for 1 sec to have full popup as expected
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await delay(1000)
+        //////
+        expect(await bookPage.screenshot()).toMatchSnapshot('YL-Book-a-Demo-Popup.png');
 
 
     })
@@ -126,18 +132,19 @@ test.describe("Visual Regression YouLend Page", () => {
     test('Single Element - Explore the Docs ', async ({ page }) => {
         await page.goto('https://youlend.com/')
 
-        //Company button Visual Test
-        const company = page.locator('#w-node-d7777b36-53bc-6ffa-43d1-dfcb5beadf3e-5beadf3b > div > a')
-        expect(await company.screenshot()).toMatchSnapshot('YL-Explore-the-docs.png');
+       //Scroll down to find the button
+        for(let i = 0; i < 6; i++) {
+            await page.keyboard.down('PageDown');
+        }
+        
+        const explore = page.locator('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
+        expect(await explore.screenshot()).toMatchSnapshot('YL-Explore-the-docs.png');
 
         //Company dropdown Visual Test
-        await page.click('#w-node-d7777b36-53bc-6ffa-43d1-dfcb5beadf3e-5beadf3b > div > a')
+        await page.click('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
         expect(await page.screenshot()).toMatchSnapshot('YL-Explore-the-docs-Page.png')
         
-
-
     })
-
 
 
 })

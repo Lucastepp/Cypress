@@ -5,3 +5,8 @@ export async function loadHomepage(page) {
 export async function assertTitle(page) {
     await page.waitForSelector('#carousel > div > div.active.item > div > h4')
 }
+
+export async function delay(ms) {
+    new Promise(resolve => setTimeout(resolve, ms))
+} 
+
