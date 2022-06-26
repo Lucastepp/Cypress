@@ -28,7 +28,6 @@ test.describe("Visual Regression YouLend Page", () => {
         const prodDropdown = page.locator('#w-dropdown-list-0')
         expect(await prodDropdown.screenshot()).toMatchSnapshot('YL-prod-dropdown.png');
 
-
     })
 
     test('Single Element - Use Cases ', async ({ page }) => {
