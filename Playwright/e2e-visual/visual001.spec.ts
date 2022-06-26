@@ -94,7 +94,7 @@ test.describe("Visual Regression YouLend Page", () => {
         // const loginAuth2 = page.locator('#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div.auth0-lock-header > div.auth0-lock-header-welcome')
         // expect(await loginAuth2.screenshot()).toMatchSnapshot('YL-LoginAuth2.png');
     })
-
+    
     test('Single Element - Seeking Funding ', async ({ page }) => {
         await page.goto('https://youlend.com/')
 
@@ -107,6 +107,123 @@ test.describe("Visual Regression YouLend Page", () => {
         const SeekingFundPage = page.locator('body')
         expect(await SeekingFundPage.screenshot()).toMatchSnapshot('YL-SeekingF-Page.png');
 
+    })
+
+
+    test('Single Element - Capital ', async ({ page }) => {
+        await page.goto('https://youlend.com/')
+
+        //Company button Visual Test
+        await page.keyboard.down('PageDown')
+        const capital = await page.locator('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(1) > div')
+        expect(await capital.screenshot()).toMatchSnapshot('YL-Capital-card.png');
+
+        //Company dropdown Visual Test
+        await page.click('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(1) > div > div > a')
+        expect(await page.screenshot()).toMatchSnapshot('YL-capital-page.png')
+        
+
+    })
+
+    test('Single Element - Instant Payouts ', async ({ page }) => {
+        await page.goto('https://youlend.com/')
+
+        //Company button Visual Test
+        await page.keyboard.down('PageDown')
+        const instant = await page.locator('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div')
+        expect(await instant.screenshot()).toMatchSnapshot('YL-InstantPayouts-card.png');
+
+        //Company dropdown Visual Test
+        await page.click('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div > div > a')
+        expect(await page.screenshot()).toMatchSnapshot('YL-InstantPayouts-page.png')
+        
+    })
+
+    test('Single Element - Why partner w/ YouLend Cards', async ({ page }) => {
+        await page.goto('https://youlend.com/')
+
+        //Company button Visual Test
+        for(let i = 0; i < 2; i++) {
+            await page.keyboard.down('PageDown');
+        }
+        const instant = await page.locator('body > main > section:nth-child(4) > div')
+        expect(await instant.screenshot()).toMatchSnapshot('YL-Why-partner-cards.png');
+
+        //?No need to check all the buttons because the all route to /use-cases
+
+        //Company dropdown Visual Test
+        await page.click('#w-node-_06f7f875-6196-adb6-a649-8a97c10d5dfc-c10d5dda > div > div > a')
+        expect(await page.screenshot()).toMatchSnapshot('YL-Use-cases-page.png')
+        
+    })
+
+    test('Single Element - Embedded finance', async ({ page }) => {
+        await page.goto('https://youlend.com/')
+
+        //Company button Visual Test
+        for(let i = 0; i < 3; i++) {
+            await page.keyboard.down('PageDown');
+        }
+        const instant = await page.locator('body > main > section:nth-child(5) > div > div')
+        expect(await instant.screenshot()).toMatchSnapshot('YL-Embedded finance card.png');
+
+        //?No need to check all the buttons because the all route to /use-cases
+
+        //Company dropdown Visual Test
+        await page.click('#w-node-_91a2e957-94d5-4799-2fca-b4d736a54c04-36a54bff > div > a')
+
+        //? Force wait for 1 sec to have full popup as expected
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await delay(1000)
+
+        expect(await page.screenshot()).toMatchSnapshot('YL-EmbbededFinance-page.png')
+        
+    })
+
+    test('Single Element - Less Cash, more possitibily', async ({ page }) => {
+        await page.goto('https://youlend.com/')
+
+        //Company button Visual Test
+        for(let i = 0; i < 4; i++) {
+            await page.keyboard.down('PageDown');
+        }
+        const instant = await page.locator('body > main > section.section.white > div')
+        expect(await instant.screenshot()).toMatchSnapshot('YL-Less-cash-card.png');
+
+        //?No need to check all the buttons because the all route to /use-cases
+
+        //Company dropdown Visual Test
+        await page.click('#w-node-_050e9792-cdd7-9df1-c39b-9b440b7570a3-0b7570a0 > div > a')
+
+        //? Force wait for 1 sec to have full popup as expected
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await delay(1000)
+
+        expect(await page.screenshot()).toMatchSnapshot('YL-lessCash-whitepaper-page.png')
+        
+    })
+
+    test('Single Element - Recent Blog Posts', async ({ page }) => {
+        await page.goto('https://youlend.com/')
+
+        //Company button Visual Test
+        for(let i = 0; i < 5; i++) {
+            await page.keyboard.down('PageDown');
+        }
+        const instant = await page.locator('body > main > section:nth-child(8) > div')
+
+        //? Force wait for 1 sec to have full popup as expected
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await delay(1000)
+
+        expect(await instant.screenshot()).toMatchSnapshot('YL-Recent-Blog-Card.png');
+
+        //?No need to check all the buttons because the all route to /use-cases
+
+        //Company dropdown Visual Test
+        await page.click('body > main > section:nth-child(8) > div > div.title-block.has-button > a')
+        expect(await page.screenshot()).toMatchSnapshot('YL-Recent-Blog-page.png')
+        
     })
 
     test('Single Element - Book a Demo ', async ({ page }) => {
