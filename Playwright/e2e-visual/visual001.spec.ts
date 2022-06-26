@@ -28,6 +28,7 @@ test.describe("Visual Regression YouLend Page", () => {
         const prodDropdown = page.locator('#w-dropdown-list-0')
         expect(await prodDropdown.screenshot()).toMatchSnapshot('YL-prod-dropdown.png');
 
+        
     })
 
     test('Single Element - Use Cases ', async ({ page }) => {
@@ -81,12 +82,16 @@ test.describe("Visual Regression YouLend Page", () => {
         const login = page.locator('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button')
         expect(await login.screenshot()).toMatchSnapshot('YL-LoginButton.png');
 
-        //Login Auth0 Screen Visual Test
-        await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button')
-        const loginAuth0 = page.locator('#auth0-lock-container-1 > div')
-        expect(await loginAuth0.screenshot()).toMatchSnapshot('YL-LoginAuth0.png');
-       
 
+        //? Ask Mo about Auth0 - Not possible to take printscreens
+        //Login Auth0 Screen Visual Test
+        //await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button')
+        //expect(await page.screenshot()).toMatchSnapshot('YL-Login-Auth0.png')
+        // const loginAuth0 = page.locator('#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div:nth-child(3)')
+        // expect(await loginAuth0.screenshot()).toMatchSnapshot('YL-LoginAuth0.png');
+
+        // const loginAuth2 = page.locator('#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div.auth0-lock-header > div.auth0-lock-header-welcome')
+        // expect(await loginAuth2.screenshot()).toMatchSnapshot('YL-LoginAuth2.png');
     })
 
     test('Single Element - Seeking Funding ', async ({ page }) => {
