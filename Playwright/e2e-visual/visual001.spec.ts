@@ -263,5 +263,22 @@ test.describe("Visual Regression YouLend Page", () => {
         
     })
 
+    test('Single Element - Contact Page ', async ({ page }) => {
+        await page.goto('https://youlend.com/')
+
+       //Scroll down to find the button
+        for(let i = 0; i < 6; i++) {
+            await page.keyboard.down('PageDown');
+        }
+        
+        const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a')
+        expect(await explore.screenshot()).toMatchSnapshot('YL-ContactUs-button.png');
+
+        //Company dropdown Visual Test
+        await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a')
+        expect(await page.screenshot()).toMatchSnapshot('YL-ContactUs-Page.png')
+        
+    })
+
 
 })
