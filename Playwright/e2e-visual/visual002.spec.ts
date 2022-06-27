@@ -4,17 +4,17 @@ test.describe("Partner Dashboard Visual Regression", () => {
 
   const partners = [
     "justeat",
-    "shopify",
-    "paymentsense",
-    "rms",
-    "dojo",
-    "google",
-    "mastercard",
-    "takepayments",
-    "ebayuk",
-    "kinex",
-    "payU",
-    "Swoopfinance",
+    // "shopify",
+    // "paymentsense",
+    // "rms",
+    // "dojo",
+    // "google",
+    // "mastercard",
+    // "takepayments",
+    // "ebayuk",
+    // "kinex",
+    // "payU",
+    // "Swoopfinance",
   ];
 
   partners.forEach((partner) => {
@@ -54,32 +54,32 @@ test.describe("Partner Dashboard Visual Regression", () => {
       switch (`${partner}`) {
         case 'justeat':
             await page.type("text=yours@example.com", 'lucas.pinto+0276@youlend.com')
-            await page.type("text=your password", 'Password1!!!')
+            await page.type("text=your password", 'Password1!!')
             
           break;
         case 'shopify':
             await page.type("text=yours@example.com", 'lucas.pinto+0278@youlend.com')
-            await page.type("text=your password", 'Password1!!!')
+            await page.type("text=your password", 'Password1!!')
           break;
         case "paymentsense":
             await page.type("text=yours@example.com", 'lucas.pinto+0279@youlend.com')
-            await page.type("text=your password", 'Password1!!!')
+            await page.type("text=your password", 'Password1!!')
           break;
         case "rms":
             await page.type("text=yours@example.com", 'lucas.pinto+0280@youlend.com')
-            await page.type("text=your password", 'Password1!!!')
+            await page.type("text=your password", 'Password1!!')
           break;
         case "dojo":
             await page.type("text=yours@example.com", 'lucas.pinto+0281@youlend.com')
-            await page.type("text=your password", 'Password1!!!')
+            await page.type("text=your password", 'Password1!!')
           break;
         case "google":
             await page.type("text=yours@example.com", 'lucas.pinto+0282@youlend.com')
-            await page.type("text=your password", 'Password1!!!')
+            await page.type("text=your password", 'Password1!!')
           break;
         case "mastercard":
             await page.type("text=yours@example.com", 'lucas.pinto+0283@youlend.com')
-            await page.type("text=your password", 'Password1!!!')
+            await page.type("text=your password", 'Password1!!')
           break;
         case "takepayments":
             await page.type("text=yours@example.com", 'lucas.pinto+0284@youlend.com')
