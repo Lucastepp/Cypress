@@ -104,6 +104,11 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //Checking Seeking Funding Page Visual Test
         await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button')
+
+        //? Force wait for 1 sec to have full popup as expected
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await delay(1500)
+
         const SeekingFundPage = page.locator('body')
         expect(await SeekingFundPage.screenshot()).toMatchSnapshot('YL-SeekingF-Page.png');
 
@@ -120,6 +125,11 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //Company dropdown Visual Test
         await page.click('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(1) > div > div > a')
+
+        //? Force wait for 1 sec to have full popup as expected
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await delay(1000)
+
         expect(await page.screenshot()).toMatchSnapshot('YL-capital-page.png')
         
 
@@ -135,6 +145,11 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //Company dropdown Visual Test
         await page.click('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div > div > a')
+
+        //? Force wait for 1 sec to have full popup as expected
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await delay(1000)
+
         expect(await page.screenshot()).toMatchSnapshot('YL-InstantPayouts-page.png')
         
     })
@@ -174,7 +189,7 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //? Force wait for 1 sec to have full popup as expected
         const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-        await delay(1000)
+        await delay(1500)
 
         expect(await page.screenshot()).toMatchSnapshot('YL-EmbbededFinance-page.png')
         
@@ -197,7 +212,7 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //? Force wait for 1 sec to have full popup as expected
         const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-        await delay(1000)
+        await delay(1500)
 
         expect(await page.screenshot()).toMatchSnapshot('YL-lessCash-whitepaper-page.png')
         
@@ -259,6 +274,11 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //Company dropdown Visual Test
         await page.click('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
+
+        //? Force wait for 1 sec to have full popup as expected
+        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+        await delay(1000)
+
         expect(await page.screenshot()).toMatchSnapshot('YL-Explore-the-docs-Page.png')
         
     })
