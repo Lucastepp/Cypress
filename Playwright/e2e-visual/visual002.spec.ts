@@ -1,27 +1,31 @@
 import test, { expect, Locator, Page } from "@playwright/test";
 
+const delay = (ms) =>
+new Promise((resolve) => setTimeout(resolve, ms));
+
 test.describe("Partner Dashboard Visual Regression", () => {
   const partners = [
-    "justeat",
-    "shopify",
-    "paymentsense",
-    "rms",
-    "dojo",
-    "google",
-    "mastercard",
-    "takepayments",
-    "ebayuk",
-    "kinex",
-    "payu/pl",
-    "swoop",
-    "boloo/nl",
-    "foodhub",
-    "eposnowcapital",
-    "fundingcircle",
-    "hdp", //handepay
-    "paypoint",
-    "tide",
-    "wedoaccounting",
+    // "justeat",
+    // "shopify",
+    // "paymentsense",
+    // "rms",
+    // "dojo",
+    // "google",
+    // "mastercard",
+    // "takepayments",
+    // "ebayuk",
+    // "kinex",
+    // "payu/pl",
+    // "swoop",
+    // "boloo/nl",
+    // "foodhub",
+    // "eposnowcapital",
+    // "fundingcircle",
+    // "hdp", //handepay
+    // "paypoint",
+    // "tide",
+    // "wedoaccounting",
+     "brainpoint-be/be-fr",
   ];
 
   partners.forEach((partner) => {
@@ -57,23 +61,45 @@ test.describe("Partner Dashboard Visual Regression", () => {
         await page.goto(
           "https://staging.youlend.com/apply/" + partner + "/signup"
         );
-        const loginButton = page.locator("text=Loginperson >> span");
-        expect(await loginButton.screenshot()).toMatchSnapshot(
-          `YL-${partner}Login-Button.png`
-        );
 
-        //? Force wait for 1 sec to have full popup as expected
-        const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-        await delay(1500);
+        if (partner === "brainpoint-be/be-fr") {
+          const loginButton = page.locator(
+            "body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control"
+          );
 
-        await page.click("text=Login");
-        expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+          await delay(500);
+          
+          expect(await loginButton.screenshot()).toMatchSnapshot(
+            `YL-${partner}Login-Button.png`
+          );
 
-        await delay(2000);
+          await delay(1500);
 
-        expect(await page.screenshot()).toMatchSnapshot(
-          `YL-${partner}Auth0-page.png`
-        );
+          await page.click("text=Connexion");
+          expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+
+          await delay(2000);
+
+          expect(await page.screenshot()).toMatchSnapshot(
+            `YL-${partner}Auth0-page.png`
+          );
+        } else {
+          const loginButton = page.locator("text=Loginperson >> span");
+          expect(await loginButton.screenshot()).toMatchSnapshot(
+            `YL-${partner}Login-Button.png`
+          );
+
+          await delay(1500);
+
+          await page.click("text=Login");
+          expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+
+          await delay(2000);
+
+          expect(await page.screenshot()).toMatchSnapshot(
+            `YL-${partner}Auth0-page.png`
+          );
+        }
 
         switch (partner) {
           case "justeat":
@@ -176,18 +202,24 @@ test.describe("Partner Dashboard Visual Regression", () => {
             await page.keyboard.down("Tab");
             await page.keyboard.type("Password1!!");
             break;
+          case "brainpoint-be/be-fr":
+            await page.keyboard.type("lucas.pinto+0299@youlend.com");
+            await page.keyboard.down("Tab");
+            await page.keyboard.type("Password1!!");
+            break;
 
           default:
             throw Error("Partner Not Found!!!!");
         }
 
-        await delay(1500);
+
+        await delay(500);
 
         await page.click(
           "#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div > button > span"
         );
 
-        await delay(2500);
+        await delay(3000);
 
         expect(await page.screenshot()).toMatchSnapshot(
           `YL-${partner}-page.png`
