@@ -64,109 +64,57 @@ test.describe("Partner Dashboard Visual Regression", () => {
 
         await page.click("text=Login");
         expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
-      }
-    );
 
-    test(
-      " 04 - Login in on  = [ " + partner + " ] Dashboard",
-      async ({ page }) => {
-        await page.goto(
-          "https://youlend-stag.eu.auth0.com/login?state=hKFo2SBadTZFdHI1VXJJaGJQbmFFQ1REYUkwZUJTTWczeWJmbaFupWxvZ2luo3RpZNkgRUVfeGZsRU1mRlgySnZ6NXV3MWJrNDVfdkhmOFVtcEujY2lk2SB4cjlKMWk2ZFFsM3dGTFRsbkZJMmVkdTBoY2FjeUVzOQ&client=xr9J1i6dQl3wFLTlnFI2edu0hcacyEs9&protocol=oauth2&redirect_uri=https%3A%2F%2Fstaging.youlend.com%2Fapply%2Fjusteat%2Flogin-callback&audience=https%3A%2F%2Fstaging.ylcustomerapi.com&responseType=token%20id_token%20refresh_token&scope=openid%20profile%20email%20offline_access&yl_site_options=&language=en&response_type=code&response_mode=query&nonce=ckZNRm8zdHZVSzNqai5CMkJLaWZmbEFQNE9kVF9NMzlZcWU1d1lKQ2VzdQ%3D%3D&code_challenge=liiuWUvIT5cuiL0Uy3jALmcWFs1efmV4mUurVF9NOkU&code_challenge_method=S256&auth0Client=eyJuYW1lIjoiQGF1dGgwL2F1dGgwLWFuZ3VsYXIiLCJ2ZXJzaW9uIjoiMS4zLjIifQ%3D%3D"
-        );
+        //? Force wait for 1 sec to have full popup as expected
+        const delayx = (ms) =>
+          new Promise((resolve) => setTimeout(resolve, ms));
 
-        switch (`${partner}`) {
+        await delayx(3000);
+
+        switch (partner) {
           case "justeat":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0276@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!");
+            await page.keyboard.type("lucas.pinto+0276@youlend.com");
+            await page.keyboard.down("Tab");
+            await page.keyboard.type("Password1!!");
 
             break;
           case "shopify":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0278@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!");
             break;
           case "paymentsense":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0279@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!");
             break;
           case "rms":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0280@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!");
             break;
           case "dojo":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0281@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!");
             break;
           case "google":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0282@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!");
             break;
           case "mastercard":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0283@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!");
             break;
           case "takepayments":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0284@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!!");
+            break;
           case "ebayuk":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0285@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!!");
             break;
           case "kinex":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0286@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!!");
             break;
           case "payU":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0287@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!!");
             break;
           case "Swoopfinance":
-            await page.type(
-              "text=yours@example.com",
-              "lucas.pinto+0288@youlend.com"
-            );
-            await page.type("text=your password", "Password1!!!");
             break;
           default:
             throw Error("Partner Not Found!!!!");
         }
 
+        await delayx(1000);
+
         expect(await page.screenshot()).toMatchSnapshot(
           `YL-${partner}Auth0-page.png`
         );
-        await page.click("text=Log In");
+
+        await page.click(
+          "#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div > button > span"
+        );
+
+        await delayx(2000);
 
         expect(await page.screenshot()).toMatchSnapshot(
           `YL-${partner}-page.png`
