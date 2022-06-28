@@ -9,7 +9,7 @@ const config: PlaywrightTestConfig = {
     use: {
         headless: true,
         actionTimeout: 15000,
-        video: "off",
+        video: "on",
         screenshot: 'off',
         ignoreHTTPSErrors: true
 
