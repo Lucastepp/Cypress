@@ -1,7 +1,6 @@
 import test, { expect, Locator, Page } from "@playwright/test";
 
-const delay = (ms) =>
-new Promise((resolve) => setTimeout(resolve, ms));
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 test.describe("Partner Dashboard Visual Regression", () => {
   const partners = [
@@ -15,9 +14,9 @@ test.describe("Partner Dashboard Visual Regression", () => {
     // "takepayments",
     // "ebayuk",
     // "kinex",
-    // "payu/pl",
+    "payu/pl",
     // "swoop",
-    // "boloo/nl",
+    "boloo/nl",
     // "foodhub",
     // "eposnowcapital",
     // "fundingcircle",
@@ -25,7 +24,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
     // "paypoint",
     // "tide",
     // "wedoaccounting",
-     "brainpoint-be/be-fr",
+    "brainpoint-be/be-fr",
   ];
 
   partners.forEach((partner) => {
@@ -68,7 +67,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
           );
 
           await delay(500);
-          
+
           expect(await loginButton.screenshot()).toMatchSnapshot(
             `YL-${partner}Login-Button.png`
           );
@@ -83,6 +82,35 @@ test.describe("Partner Dashboard Visual Regression", () => {
           expect(await page.screenshot()).toMatchSnapshot(
             `YL-${partner}Auth0-page.png`
           );
+        } else if (partner === "brainpoint-be" || partner === "boloo/nl") {
+          const loginButton = page.locator("body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control");
+          expect(await loginButton.screenshot()).toMatchSnapshot(
+            `YL-${partner}Login-Button.png`
+            
+          );
+          await page.click("text=Inloggen");
+          expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+
+          await delay(2000);
+
+          expect(await page.screenshot()).toMatchSnapshot(
+            `YL-${partner}Auth0-page.png`
+          );
+        } else if (partner === "payu/pl") {
+            const loginButton = page.locator("body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control");
+            expect(await loginButton.screenshot()).toMatchSnapshot(
+              `YL-${partner}Login-Button.png`
+            );
+            await page.click("body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control");
+            expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+  
+            await delay(2000);
+  
+            expect(await page.screenshot()).toMatchSnapshot(
+              `YL-${partner}Auth0-page.png`
+            );
+  
+
         } else {
           const loginButton = page.locator("text=Loginperson >> span");
           expect(await loginButton.screenshot()).toMatchSnapshot(
@@ -211,7 +239,6 @@ test.describe("Partner Dashboard Visual Regression", () => {
           default:
             throw Error("Partner Not Found!!!!");
         }
-
 
         await delay(500);
 
