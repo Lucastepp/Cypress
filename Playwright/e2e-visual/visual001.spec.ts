@@ -12,6 +12,7 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //Closing cookies pop-up
         await page.click('body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--238105223 > div > a')
+        await delay(1000)
     
       });
 
@@ -91,15 +92,15 @@ test.describe("Visual Regression YouLend Page", () => {
         expect(await login.screenshot()).toMatchSnapshot('YL-LoginButton.png');
 
 
-        //? Ask Mo about Auth0 - Not possible to take printscreens
-        //Login Auth0 Screen Visual Test
-        //await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button')
-        //expect(await page.screenshot()).toMatchSnapshot('YL-Login-Auth0.png')
-        // const loginAuth0 = page.locator('#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div:nth-child(3)')
-        // expect(await loginAuth0.screenshot()).toMatchSnapshot('YL-LoginAuth0.png');
+        await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button')
 
-        // const loginAuth2 = page.locator('#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div.auth0-lock-header > div.auth0-lock-header-welcome')
-        // expect(await loginAuth2.screenshot()).toMatchSnapshot('YL-LoginAuth2.png');
+        expect(page.url()).toContain("https://youlend.com/apply/dashboard/login");
+
+          await delay(3000);
+
+          expect(await page.screenshot()).toMatchSnapshot(
+            `YL-Auth0-page.png`
+          );
     })
     
     test('Single Element - Seeking Funding ', async ({ page }) => {
@@ -113,9 +114,6 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //? Force wait for 1 sec to have full popup as expected
         await delay(1500)
-
-        //Closing cookies pop-up
-        await page.click('body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--238105223 > div > a')
 
         const SeekingFundPage = page.locator('body')
         expect(await SeekingFundPage.screenshot()).toMatchSnapshot('YL-SeekingF-Page.png');
@@ -136,9 +134,6 @@ test.describe("Visual Regression YouLend Page", () => {
         //? Force wait for 1 sec to have full popup as expected
         await delay(1000)
 
-        //Closing cookies pop-up
-        await page.click('body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--238105223 > div > a')
-
         expect(await page.screenshot()).toMatchSnapshot('YL-capital-page.png')
         
 
@@ -151,8 +146,6 @@ test.describe("Visual Regression YouLend Page", () => {
         const instant = await page.locator('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div')
         expect(await instant.screenshot()).toMatchSnapshot('YL-InstantPayouts-card.png');
 
-        //Company dropdown Visual Test
-        await page.click('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div > div > a')
 
         //? Force wait for 1 sec to have full popup as expected
         await delay(1000)
@@ -171,7 +164,6 @@ test.describe("Visual Regression YouLend Page", () => {
         expect(await instant.screenshot()).toMatchSnapshot('YL-Why-partner-cards.png');
 
         //?No need to check all the buttons because the all route to /use-cases
-
         //Company dropdown Visual Test
         await page.click('#w-node-_06f7f875-6196-adb6-a649-8a97c10d5dfc-c10d5dda > div > div > a')
         expect(await page.screenshot()).toMatchSnapshot('YL-Use-cases-page.png')
