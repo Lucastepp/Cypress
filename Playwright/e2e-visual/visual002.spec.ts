@@ -4,26 +4,26 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 test.describe("Partner Dashboard Visual Regression", () => {
   const partners = [
-    // "justeat",
-    // "shopify",
-    // "paymentsense",
-    // "rms",
-    // "dojo",
-    // "google",
-    // "mastercard",
-    // "takepayments",
-    // "ebayuk",
-    // "kinex",
+    "justeat",
+    "shopify",
+    "paymentsense",
+    "rms",
+    "dojo",
+    "google",
+    "mastercard",
+    "takepayments",
+    "ebayuk",
+    "kinex",
     "payu/pl",
-    // "swoop",
+    "swoop",
     "boloo/nl",
-    // "foodhub",
-    // "eposnowcapital",
-    // "fundingcircle",
-    // "hdp", //handepay
-    // "paypoint",
-    // "tide",
-    // "wedoaccounting",
+    "foodhub",
+    "eposnowcapital",
+    "fundingcircle",
+    "hdp", //handepay
+    "paypoint",
+    "tide",
+    "wedoaccounting",
     "brainpoint-be/be-fr",
   ];
 
@@ -35,8 +35,11 @@ test.describe("Partner Dashboard Visual Regression", () => {
           "https://staging.youlend.com/apply/" + partner + "/signup"
         );
 
-        const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        
+        await page.click("body > div > div > a");
         await delay(2000);
+
+
 
         expect(await page.screenshot()).toMatchSnapshot(
           `YL-${partner}Signup-Landing-page.png`
@@ -246,7 +249,9 @@ test.describe("Partner Dashboard Visual Regression", () => {
           "#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div > button > span"
         );
 
-        await delay(3000);
+        await page.click("body > div > div > a");
+
+        await delay(3500);
 
         expect(await page.screenshot()).toMatchSnapshot(
           `YL-${partner}-page.png`
