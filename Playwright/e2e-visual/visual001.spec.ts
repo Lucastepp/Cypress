@@ -1,15 +1,27 @@
 import { test, expect } from '@playwright/test'
 //import { delay } from '../helpers'
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+
 test.describe("Visual Regression YouLend Page", () => {
 
-    test('Full Page Snapshot', async ({ page }) => {
+    test.beforeEach(async ({ page }) => {
+       
         await page.goto('https://youlend.com/')
+
+        //Closing cookies pop-up
+        await page.click('body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--238105223 > div > a')
+    
+      });
+
+    test('Full Page Snapshot', async ({ page }) => {
+        
+
         expect(await page.screenshot()).toMatchSnapshot('youlend-homepage.png')
     })
 
     test('Single Element - YL Logo', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Logo Visual Test
         const logo = page.locator('#nav > div > div > div.nav-left > a > img')
@@ -19,7 +31,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Products ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Products button Visual Test
         const products = page.locator('#w-dropdown-toggle-0 > div')
@@ -33,7 +44,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Use Cases ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Use Cases button Visual Test
         const UseCases = page.locator('#w-dropdown-toggle-1 > div')
@@ -48,7 +58,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Resources ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Resources button Visual Test
         const resources = page.locator('#w-dropdown-toggle-2 > div')
@@ -62,7 +71,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Company ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Company button Visual Test
         const company = page.locator('#w-dropdown-toggle-3 > div')
@@ -77,7 +85,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Login ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Login button Visual Test
         const login = page.locator('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button')
@@ -96,7 +103,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
     
     test('Single Element - Seeking Funding ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Seeking Funding button Visual Test
         const seeking = page.locator('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button')
@@ -106,8 +112,10 @@ test.describe("Visual Regression YouLend Page", () => {
         await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button')
 
         //? Force wait for 1 sec to have full popup as expected
-        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         await delay(1500)
+
+        //Closing cookies pop-up
+        await page.click('body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--238105223 > div > a')
 
         const SeekingFundPage = page.locator('body')
         expect(await SeekingFundPage.screenshot()).toMatchSnapshot('YL-SeekingF-Page.png');
@@ -116,7 +124,6 @@ test.describe("Visual Regression YouLend Page", () => {
 
 
     test('Single Element - Capital ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Company button Visual Test
         await page.keyboard.down('PageDown')
@@ -127,8 +134,10 @@ test.describe("Visual Regression YouLend Page", () => {
         await page.click('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(1) > div > div > a')
 
         //? Force wait for 1 sec to have full popup as expected
-        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         await delay(1000)
+
+        //Closing cookies pop-up
+        await page.click('body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--238105223 > div > a')
 
         expect(await page.screenshot()).toMatchSnapshot('YL-capital-page.png')
         
@@ -136,7 +145,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Instant Payouts ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Company button Visual Test
         await page.keyboard.down('PageDown')
@@ -147,7 +155,6 @@ test.describe("Visual Regression YouLend Page", () => {
         await page.click('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div > div > a')
 
         //? Force wait for 1 sec to have full popup as expected
-        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         await delay(1000)
 
         expect(await page.screenshot()).toMatchSnapshot('YL-InstantPayouts-page.png')
@@ -155,7 +162,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Why partner w/ YouLend Cards', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Company button Visual Test
         for(let i = 0; i < 2; i++) {
@@ -173,7 +179,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Embedded finance', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Company button Visual Test
         for(let i = 0; i < 3; i++) {
@@ -188,7 +193,6 @@ test.describe("Visual Regression YouLend Page", () => {
         await page.click('#w-node-_91a2e957-94d5-4799-2fca-b4d736a54c04-36a54bff > div > a')
 
         //? Force wait for 1 sec to have full popup as expected
-        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         await delay(1500)
 
         expect(await page.screenshot()).toMatchSnapshot('YL-EmbbededFinance-page.png')
@@ -196,7 +200,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Less Cash, more possitibily', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Company button Visual Test
         for(let i = 0; i < 4; i++) {
@@ -211,7 +214,6 @@ test.describe("Visual Regression YouLend Page", () => {
         await page.click('#w-node-_050e9792-cdd7-9df1-c39b-9b440b7570a3-0b7570a0 > div > a')
 
         //? Force wait for 1 sec to have full popup as expected
-        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         await delay(1500)
 
         expect(await page.screenshot()).toMatchSnapshot('YL-lessCash-whitepaper-page.png')
@@ -219,7 +221,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Recent Blog Posts', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Company button Visual Test
         for(let i = 0; i < 5; i++) {
@@ -228,7 +229,6 @@ test.describe("Visual Regression YouLend Page", () => {
         const instant = await page.locator('body > main > section:nth-child(8) > div')
 
         //? Force wait for 1 sec to have full popup as expected
-        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         await delay(1000)
 
         expect(await instant.screenshot()).toMatchSnapshot('YL-Recent-Blog-Card.png');
@@ -242,7 +242,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Book a Demo ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
         //Company button Visual Test
         const book = page.locator('body > main > div.section.hero > div > div > div.hero-content > div')
@@ -253,7 +252,6 @@ test.describe("Visual Regression YouLend Page", () => {
         const bookPage = page.locator('body > div.popup-modal > div')
 
         //? Force wait for 1 sec to have full popup as expected
-        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         await delay(1000)
         //////
         expect(await bookPage.screenshot()).toMatchSnapshot('YL-Book-a-Demo-Popup.png');
@@ -262,7 +260,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Explore the Docs ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
        //Scroll down to find the button
         for(let i = 0; i < 6; i++) {
@@ -276,7 +273,6 @@ test.describe("Visual Regression YouLend Page", () => {
         await page.click('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
 
         //? Force wait for 1 sec to have full popup as expected
-        const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
         await delay(1000)
 
         expect(await page.screenshot()).toMatchSnapshot('YL-Explore-the-docs-Page.png')
@@ -284,7 +280,6 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('Single Element - Contact Page ', async ({ page }) => {
-        await page.goto('https://youlend.com/')
 
        //Scroll down to find the button
         for(let i = 0; i < 6; i++) {
