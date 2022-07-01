@@ -97,7 +97,7 @@ test.describe("Visual Regression YouLend Page", () => {
 
     })
 
-    test.only('Single Element - Resources ', async ({ page }) => {
+    test('Single Element - Resources ', async ({ page }) => {
 
         //Resources button Visual Test
         const resources = page.locator('#w-dropdown-toggle-2')
@@ -157,12 +157,11 @@ test.describe("Visual Regression YouLend Page", () => {
         expect(page.url()).toContain("/company/contact")
 
 
+        //!Need to check how to check URL when opening new window >>
         //? Dropdown CAREERS - INVERTED WITH LAST DROPDOWN OPTION BECAUSE CAREERS BRINGS US TO LINKEDIN PAGE
-        await page.hover('#w-dropdown-toggle-3 > div')
-        await page.click('#w-dropdown-list-3 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
-        expect(page.url()).toContain("https://www.linkedin.com/company/youlend/jobs/")
-
-
+        //await page.hover('#w-dropdown-toggle-3 > div')
+        //await page.click('#w-dropdown-list-3 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
+        //expect(page.url()).toContain("https://www.linkedin.com/company/youlend/jobs/")
 
     })
 
