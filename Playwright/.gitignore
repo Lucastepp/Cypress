@@ -4,4 +4,7 @@ node_modules/
 /playwright/.cache/
 user.json
 YL-user.json
-
+/youlend
+/partner-dashboard-users.ts
+user.json
+YL-user.json

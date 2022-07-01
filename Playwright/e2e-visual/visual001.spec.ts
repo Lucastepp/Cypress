@@ -363,9 +363,46 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //Company dropdown Visual Test
         await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a')
+        await delay(1000)
         expect(await page.screenshot()).toMatchSnapshot('YL-ContactUs-Page.png')
         
     })
+
+    test('Single Element - Partners page ', async ({ page }) => {
+
+        //Scroll down to find the button
+         for(let i = 0; i < 6; i++) {
+             await page.keyboard.down('PageDown');
+         }
+         
+         const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(2) > a')
+         expect(await explore.screenshot()).toMatchSnapshot('YL-Partners-button.png');
+ 
+         //Company dropdown Visual Test
+         await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(2) > a')
+         await delay(1000)
+
+         //! Need to take screen shot from the whole page
+         expect(await page.screenshot()).toMatchSnapshot('YL-Partners-Page.png')
+         
+     })
+
+     test('Single Element - Merchant page ', async ({ page }) => {
+
+        //Scroll down to find the button
+         for(let i = 0; i < 6; i++) {
+             await page.keyboard.down('PageDown');
+         }
+         
+         const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(3) > a')
+         expect(await explore.screenshot()).toMatchSnapshot('YL-Merchant-Businesses-button.png');
+ 
+         //Company dropdown Visual Test
+         await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(3) > a')
+         await delay(1000)
+         expect(await page.screenshot()).toMatchSnapshot('YL-Merchant-Page.png')
+         
+     })
 
 
 })

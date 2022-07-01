@@ -1,4 +1,5 @@
 import test, { expect, Locator, Page } from "@playwright/test";
+import { partnerCredential } from '../partner-dashboard-users'
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -125,7 +126,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
           await page.click("text=Login");
           expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
 
-          await delay(2000);
+          await delay(2500);
 
           expect(await page.screenshot()).toMatchSnapshot(
             `YL-${partner}Auth0-page.png`
@@ -134,109 +135,67 @@ test.describe("Partner Dashboard Visual Regression", () => {
 
         switch (partner) {
           case "justeat":
-            await page.keyboard.type("lucas.pinto+0276@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("justeat", page)
             break;
           case "shopify":
-            await page.keyboard.type("lucas.pinto+0278@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("shopify", page)
             break;
           case "paymentsense":
-            await page.keyboard.type("lucas.pinto+0279@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("paymentsense", page)
             break;
           case "rms":
-            await page.keyboard.type("lucas.pinto+0280@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("rms", page)
             break;
           case "dojo":
-            await page.keyboard.type("lucas.pinto+0281@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("dojo", page)
             break;
           case "google":
-            await page.keyboard.type("lucas.pinto+0282@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("google", page)
             break;
           case "mastercard":
-            await page.keyboard.type("lucas.pinto+0283@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("mastercard", page)
             break;
           case "takepayments":
-            await page.keyboard.type("lucas.pinto+0284@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("takepayments", page)
             break;
           case "ebayuk":
-            await page.keyboard.type("lucas.pinto+0285@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("ebayuk", page)
             break;
           case "kinex":
-            await page.keyboard.type("lucas.pinto+0286@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("kinex", page)
             break;
           case "payu/pl":
-            await page.keyboard.type("lucas.pinto+0287@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("payu/pl", page)
             break;
           case "swoop":
-            await page.keyboard.type("lucas.pinto+0288@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("swoop", page)
             break;
           case "boloo/nl":
-            await page.keyboard.type("lucas.pinto+0291@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("boloo/nl", page)
             break;
           case "foodhub":
-            await page.keyboard.type("lucas.pinto+0292@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("foodhub", page)
             break;
           case "eposnowcapital":
-            await page.keyboard.type("lucas.pinto+0293@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("eposnowcapital", page)
             break;
           case "fundingcircle":
-            await page.keyboard.type("lucas.pinto+0294@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("fundingcircle", page)
             break;
           case "hdp":
-            await page.keyboard.type("lucas.pinto+0295@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("hdp", page)
             break;
           case "paypoint":
-            await page.keyboard.type("lucas.pinto+0296@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("paypoint", page)
             break;
           case "tide":
-            await page.keyboard.type("lucas.pinto+0297@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("tide", page)
             break;
           case "wedoaccounting":
-            await page.keyboard.type("lucas.pinto+0298@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("wedoaccounting", page)
             break;
           case "brainpoint-be/be-fr":
-            await page.keyboard.type("lucas.pinto+0299@youlend.com");
-            await page.keyboard.down("Tab");
-            await page.keyboard.type("Password1!!");
+            partnerCredential("brainpoint-be/be-fr", page)
             break;
 
           default:
