@@ -259,6 +259,9 @@ test.describe("Partner Dashboard Visual Regression", () => {
 =======
         await delay(3500);
         
+<<<<<<< HEAD
+>>>>>>> 22da50c93626855596a7ae28f0450a0c05811c04
+=======
 >>>>>>> 22da50c93626855596a7ae28f0450a0c05811c04
 
         expect(await page.screenshot()).toMatchSnapshot(
