@@ -34,12 +34,26 @@ test.describe("Visual Regression YouLend Page", () => {
     test('Single Element - Products ', async ({ page }) => {
 
         //Products button Visual Test
-        const products = page.locator('#w-dropdown-toggle-0 > div')
+        const products = page.locator('#w-dropdown-toggle-0')
         expect(await products.screenshot()).toMatchSnapshot('YL-products.png');
         //Products Dropdown Visual Test
-        await page.hover('#w-dropdown-toggle-0 > div')
+        await page.click('#w-dropdown-toggle-0 > div')
         const prodDropdown = page.locator('#w-dropdown-list-0')
         expect(await prodDropdown.screenshot()).toMatchSnapshot('YL-prod-dropdown.png');
+
+        //? Dropdown OVERVIEW
+        await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2)')
+        expect(page.url()).toContain("/products-overview")
+        
+         //? Dropdown CAPITAL
+        await page.hover('#w-dropdown-toggle-0 > div')
+        await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div')
+        expect(page.url()).toContain("/products/capital")
+
+         //? Dropdown INSTANT PAYOUTS
+         await page.hover('#w-dropdown-toggle-0 > div')
+         await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
+         expect(page.url()).toContain("/products/instant-payouts")
 
         
     })
@@ -47,26 +61,71 @@ test.describe("Visual Regression YouLend Page", () => {
     test('Single Element - Use Cases ', async ({ page }) => {
 
         //Use Cases button Visual Test
-        const UseCases = page.locator('#w-dropdown-toggle-1 > div')
+        const UseCases = page.locator('#w-dropdown-toggle-1')
         expect(await UseCases.screenshot()).toMatchSnapshot('YL-UseCases.png');
         //Use Cases dropdown Visual Test
-        await page.hover('#w-dropdown-toggle-1 > div')
+        await page.click('#w-dropdown-toggle-1')
         const UseCasesDrop = page.locator('#w-dropdown-list-1')
         expect(await UseCasesDrop.screenshot()).toMatchSnapshot('YL-UseCases-dropdown.png');
 
 
+        //* Dropdown USE CASES
+
+        //await page.click('#w-dropdown-toggle-1')
+        await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2) > div')
+        expect(page.url()).toContain("/use-cases-overview")
+        
+         //? Dropdown PAYMENT SERVICE PROVIDERS
+        await page.hover('#w-dropdown-toggle-1 > div')
+        await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div')
+        expect(page.url()).toContain("/use-cases/payment-service-providers")
+
+         //? Dropdown E-COMMENCE & TECH
+         await page.hover('#w-dropdown-toggle-1 > div')
+         await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
+         expect(page.url()).toContain("/use-cases/ecommerce-and-tech")
+
+         //? Dropdown BROKERS
+         await page.hover('#w-dropdown-toggle-1 > div')
+         await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(5) > div')
+         expect(page.url()).toContain("/use-cases/brokers")
+
+          //? Dropdown BANKS
+          await page.hover('#w-dropdown-toggle-1 > div')
+          await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(6) > div')
+          expect(page.url()).toContain("/use-cases/banks")
 
     })
 
-    test('Single Element - Resources ', async ({ page }) => {
+    test.only('Single Element - Resources ', async ({ page }) => {
 
         //Resources button Visual Test
-        const resources = page.locator('#w-dropdown-toggle-2 > div')
+        const resources = page.locator('#w-dropdown-toggle-2')
         expect(await resources.screenshot()).toMatchSnapshot('YL-Resources.png');
         //Resources dropdown Visual Test
-        await page.hover('#w-dropdown-toggle-2 > div')
+        await page.click('#w-dropdown-toggle-2')
         const resourcesDrop = page.locator('#w-dropdown-list-2')
         expect(await resourcesDrop.screenshot()).toMatchSnapshot('YL-Resources-dropdown.png');
+
+        //* Dropdown RESOURCES
+        //? Dropdown OVERVIEW
+        await page.click('#w-dropdown-list-2 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2) > div')
+        expect(page.url()).toContain("/resources-overview")
+        
+         //? Dropdown partner case studies overview
+        await page.click('#w-dropdown-toggle-2 > div')
+        await page.click('#w-dropdown-list-2 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div')
+        expect(page.url()).toContain("/partner-case-studies-overview")
+
+        //? Dropdown Blog
+        await page.hover('#w-dropdown-toggle-2 > div')
+        await page.click('#w-dropdown-list-2 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
+        expect(page.url()).toContain("/blog-overview")
+
+        //? Dropdown FAQS
+        await page.hover('#w-dropdown-toggle-2 > div')
+        await page.click('#w-dropdown-list-2 > div.dropdown-inner > div.dropdown-menu > a:nth-child(5) > div')
+        expect(page.url()).toContain("/resources/faqs")
 
 
     })
@@ -74,13 +133,35 @@ test.describe("Visual Regression YouLend Page", () => {
     test('Single Element - Company ', async ({ page }) => {
 
         //Company button Visual Test
-        const company = page.locator('#w-dropdown-toggle-3 > div')
+        const company = page.locator('#w-dropdown-toggle-3')
         expect(await company.screenshot()).toMatchSnapshot('YL-Company.png');
 
         //Company dropdown Visual Test
-        await page.hover('#w-dropdown-toggle-3 > div')
+        await page.click('#w-dropdown-toggle-3')
         const companyDrop = page.locator('#w-dropdown-list-3')
         expect(await companyDrop.screenshot()).toMatchSnapshot('YL-company-dropdown.png');
+
+        //* Dropdown COMPANY
+        //? Dropdown OVERVIEW
+        await page.click('#w-dropdown-list-3 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2) > div')
+        expect(page.url()).toContain("/company-overview")
+
+        //? Dropdown GLOBAL COVERAGE
+        await page.click('#w-dropdown-toggle-3 > div')
+        await page.click('#w-dropdown-list-3 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div')
+        expect(page.url()).toContain("/company/global-coverage")
+
+        //? Dropdown CONTACT
+        await page.hover('#w-dropdown-toggle-3 > div')
+        await page.click('#w-dropdown-list-3 > div.dropdown-inner > div.dropdown-menu > a:nth-child(5) > div')
+        expect(page.url()).toContain("/company/contact")
+
+
+        //? Dropdown CAREERS - INVERTED WITH LAST DROPDOWN OPTION BECAUSE CAREERS BRINGS US TO LINKEDIN PAGE
+        await page.hover('#w-dropdown-toggle-3 > div')
+        await page.click('#w-dropdown-list-3 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
+        expect(page.url()).toContain("https://www.linkedin.com/company/youlend/jobs/")
+
 
 
     })
