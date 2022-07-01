@@ -211,6 +211,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
         await page.click("body > div > div > a");
 
         await delay(3500);
+        
 
         expect(await page.screenshot()).toMatchSnapshot(
           `YL-${partner}-page.png`
