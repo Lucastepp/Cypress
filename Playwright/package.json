@@ -12,6 +12,7 @@
     "tests:e2e": "playwright test --config=./e2e/e2e.config.ts --project=chromium",
     "tests:e2e-refactor": "playwright test --config=./e2e-refactor/e2e-refactor.config.ts --project=chromium",
     "tests:e2e-visual": "playwright test --config=./e2e-visual/visual.config.ts --project=chromium",
+    "tests:e2e-visual-old": "playwright test --config=./backups/visual-old.config.ts --project=chromium",
     "test": "npx playwright test --config=./playwright.config.js",
     "test:local": "BROWSERSTACK_LOCAL=true npx playwright test organic --config=./jubilee.config.js"
   },
