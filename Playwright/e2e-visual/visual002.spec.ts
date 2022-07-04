@@ -2,7 +2,6 @@ import test, { expect, Locator, Page } from "@playwright/test";
 import { PartnerDashboard } from "../partner-dashboard-users";
 import { VisualHelper } from "../e2e-visual/e2e-visual-helper";
 
-
 let helper: VisualHelper;
 let partnerClass: PartnerDashboard;
 
@@ -43,7 +42,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 01 - Login In on Partner  = [ " + partner + " ]",
       async ({ page }) => {
 
-        await helper.loadEnv(page, partner, "staging")
+        await helper.loadEnv(partner, "staging")
        
         await page.click("body > div > div > a");
         helper.delay(2000);
@@ -58,8 +57,9 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 02 - Checking page of Partner  = [ " + partner + " ]",
       async ({ page }) => {
 
-        helper.loadEnv(page, partner, "staging")
-   
+        await helper.loadEnv(partner, "staging")
+
+        helper.delay(2000);
         expect(page.url()).toContain(`${partner}/signup`);
       }
     );
@@ -68,25 +68,23 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 03 - Printing Login button and Login in on  = [ " + partner + " ]",
       async ({ page }) => {
 
-        await helper.loadEnv(page, partner, "staging")
-       
+        await helper.loadEnv(partner, "staging")
         //*.............................................
-      
-        await helper.languageCheck(partner, page)
-     
+
+        await helper.languageCheck(partner);
+        helper.delay(2000);
+        
         await partnerClass.partnerCredential(partner);
 
-        helper.delay(2000);
+        await helper.auth0screenShot(partner)
 
-        await page.click(
-          "#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div > button > span"
-        );
+        await helper.clickToLogin()
 
-        await page.click("body > div > div > a"); 
+        await helper.closePopup()
+        helper.delay(2500);
 
-        expect(await page.screenshot()).toMatchSnapshot(
-          `YL-${partner}-page.png`
-        );
+        await helper.partnerPageScreenShot(partner)
+       
       }
     );
   });
