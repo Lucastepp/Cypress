@@ -124,7 +124,7 @@ test.describe("Visual Regression YouLend Page", () => {
         expect(page.url()).toContain("/resources/faqs")
     })
 
-    test.only('5 - Single Element - Company ', async ({ page }) => {
+    test('5 - Single Element - Company ', async ({ page }) => {
         //Company button Visual Test
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-toggle-3', 'YL-Company.png')
         // const company = page.locator('#w-dropdown-toggle-3')
@@ -158,7 +158,7 @@ test.describe("Visual Regression YouLend Page", () => {
         //expect(page.url()).toContain("https://www.linkedin.com/company/youlend/jobs/")
     })
 
-    test.only('6 - Single Element - Login ', async ({ page }) => {
+    test('6 - Single Element - Login ', async ({ page }) => {
 
         //Login button Visual Test
         await helper.locateAndTakeScreenShot(
@@ -180,7 +180,7 @@ test.describe("Visual Regression YouLend Page", () => {
         //   );
     })
     
-    test.only('7 - Single Element - Seeking Funding ', async ({ page }) => {
+    test('7 - Single Element - Seeking Funding ', async ({ page }) => {
         //Seeking Funding button Visual Test
         await helper.locateAndTakeScreenShot(
             auxFunc, 
@@ -201,7 +201,7 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
 
-    test.only('8 - Single Element - Capital ', async ({ page }) => {
+    test('8 - Single Element - Capital ', async ({ page }) => {
 
         //Company button Visual Test
         await page.keyboard.down('PageDown')
@@ -221,15 +221,16 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('9 - Single Element - Instant Payouts ', async ({ page }) => {
-
         //Company button Visual Test
         await page.keyboard.down('PageDown')
-        const instant = await page.locator('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div')
-        expect(await instant.screenshot()).toMatchSnapshot('YL-InstantPayouts-card.png');
-
+        await helper.locateAndTakeScreenShot(auxFunc,
+             'body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div',
+             'YL-InstantPayouts-card.png')
+        // const instant = await page.locator('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-InstantPayouts-card.png');
         await helper.delay(1000)
-
-        expect(await page.screenshot()).toMatchSnapshot('YL-InstantPayouts-page.png') 
+        await helper.pageScreenShot('YL-InstantPayouts-page.png')
+        //expect(await page.screenshot()).toMatchSnapshot('YL-InstantPayouts-page.png') 
     })
 
     test('10 - Single Element - Why partner w/ YouLend Cards', async ({ page }) => {
@@ -237,13 +238,17 @@ test.describe("Visual Regression YouLend Page", () => {
         for(let i = 0; i < 2; i++) {
             await page.keyboard.down('PageDown');
         }
-        const instant = await page.locator('body > main > section:nth-child(4) > div')
-        expect(await instant.screenshot()).toMatchSnapshot('YL-Why-partner-cards.png');
+        await helper.locateAndTakeScreenShot(auxFunc,
+            'body > main > section:nth-child(4) > div',
+            'YL-Why-partner-cards.png')
+        // const instant = await page.locator('body > main > section:nth-child(4) > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-Why-partner-cards.png');
 
-        //?No need to check all the buttons because the all route to /use-cases
         //Company dropdown Visual Test
         await page.click('#w-node-_06f7f875-6196-adb6-a649-8a97c10d5dfc-c10d5dda > div > div > a')
-        expect(await page.screenshot()).toMatchSnapshot('YL-Use-cases-page.png')   
+        await helper.delay(1500)
+        await helper.pageScreenShot('YL-Use-cases-page.png')
+        // expect(await page.screenshot()).toMatchSnapshot('YL-Use-cases-page.png')   
     })
 
     test('11 - Single Element - Embedded finance', async ({ page }) => {
@@ -251,18 +256,19 @@ test.describe("Visual Regression YouLend Page", () => {
         for(let i = 0; i < 3; i++) {
             await page.keyboard.down('PageDown');
         }
-        const instant = await page.locator('body > main > section:nth-child(5) > div > div')
-        expect(await instant.screenshot()).toMatchSnapshot('YL-Embedded finance card.png');
 
-        //?No need to check all the buttons because the all route to /use-cases
+        await helper.locateAndTakeScreenShot(auxFunc,
+            'body > main > section:nth-child(5) > div > div',
+            'YL-Embedded finance card.png')
+        // const instant = await page.locator('body > main > section:nth-child(5) > div > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-Embedded finance card.png');
 
         //Company dropdown Visual Test
         await page.click('#w-node-_91a2e957-94d5-4799-2fca-b4d736a54c04-36a54bff > div > a')
 
-        //? Force wait for 1 sec to have full popup as expected
         await helper.delay(1500)
-
-        expect(await page.screenshot()).toMatchSnapshot('YL-EmbbededFinance-page.png')  
+        await helper.pageScreenShot('YL-EmbbededFinance-page.png')
+        // expect(await page.screenshot()).toMatchSnapshot('YL-EmbbededFinance-page.png')  
     })
 
     test('12 - Single Element - Less Cash, more possitibily', async ({ page }) => {
@@ -270,18 +276,17 @@ test.describe("Visual Regression YouLend Page", () => {
         for(let i = 0; i < 4; i++) {
             await page.keyboard.down('PageDown');
         }
-        const instant = await page.locator('body > main > section.section.white > div')
-        expect(await instant.screenshot()).toMatchSnapshot('YL-Less-cash-card.png');
-
-        //?No need to check all the buttons because the all route to /use-cases
+        await helper.locateAndTakeScreenShot(auxFunc,
+            'body > main > section.section.white > div',
+            'YL-Less-cash-card.png')
+        // const instant = await page.locator('body > main > section.section.white > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-Less-cash-card.png');
 
         //Company dropdown Visual Test
         await page.click('#w-node-_050e9792-cdd7-9df1-c39b-9b440b7570a3-0b7570a0 > div > a')
-
-        //? Force wait for 1 sec to have full popup as expected
         await helper.delay(1500)
-
-        expect(await page.screenshot()).toMatchSnapshot('YL-lessCash-whitepaper-page.png')
+        await helper.pageScreenShot('YL-lessCash-whitepaper-page.png')
+        // expect(await page.screenshot()).toMatchSnapshot('YL-lessCash-whitepaper-page.png')
     })
 
     test('13 - Single Element - Recent Blog Posts', async ({ page }) => {
@@ -289,110 +294,122 @@ test.describe("Visual Regression YouLend Page", () => {
         for(let i = 0; i < 5; i++) {
             await page.keyboard.down('PageDown');
         }
-        const instant = await page.locator('body > main > section:nth-child(8) > div')
 
-        //? Force wait for 1 sec to have full popup as expected
-        await helper.delay(1000)
-
-        expect(await instant.screenshot()).toMatchSnapshot('YL-Recent-Blog-Card.png');
-
-        //?No need to check all the buttons because the all route to /use-cases
+        await helper.locateAndTakeScreenShot(auxFunc,
+            'body > main > section:nth-child(8) > div',
+            'YL-Recent-Blog-Card.png')
+        // const instant = await page.locator('body > main > section:nth-child(8) > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-Recent-Blog-Card.png');
 
         //Company dropdown Visual Test
         await page.click('body > main > section:nth-child(8) > div > div.title-block.has-button > a')
-        expect(await page.screenshot()).toMatchSnapshot('YL-Recent-Blog-page.png')
+        await helper.delay(1500)
+        await helper.pageScreenShot('YL-Recent-Blog-page.png')
+        // expect(await page.screenshot()).toMatchSnapshot('YL-Recent-Blog-page.png')
     })
 
     test('14 - Single Element - Book a Demo ', async ({ page }) => {
 
         //Company button Visual Test
-        const book = page.locator('body > main > div.section.hero > div > div > div.hero-content > div')
-        expect(await book.screenshot()).toMatchSnapshot('YL-Book-a-Demo.png');
+        await helper.locateAndTakeScreenShot(auxFunc,
+            'body > main > div.section.hero > div > div > div.hero-content > div',
+            'YL-Book-a-Demo.png')
+        // const book = page.locator('body > main > div.section.hero > div > div > div.hero-content > div')
+        // expect(await book.screenshot()).toMatchSnapshot('YL-Book-a-Demo.png');
 
         //Company dropdown Visual Test
         await page.click('body > main > div.section.hero > div > div > div.hero-content > div')
-        const bookPage = page.locator('body > div.popup-modal > div')
 
-        //? Force wait for 1 sec to have full popup as expected
-        await helper.delay(1000)
-        //////
-        expect(await bookPage.screenshot()).toMatchSnapshot('YL-Book-a-Demo-Popup.png');
-
-
+        await helper.locateAndTakeScreenShot(auxFunc,
+            'body > div.popup-modal > div',
+            'YL-Book-a-Demo-Popup.png') 
+        // const bookPage = page.locator('body > div.popup-modal > div')
+        // expect(await bookPage.screenshot()).toMatchSnapshot('YL-Book-a-Demo-Popup.png');
     })
 
     test('15 - Single Element - Explore the Docs ', async ({ page }) => {
-
        //Scroll down to find the button
         for(let i = 0; i < 6; i++) {
             await page.keyboard.down('PageDown');
         }
-        
-        const explore = page.locator('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
-        expect(await explore.screenshot()).toMatchSnapshot('YL-Explore-the-docs.png');
+
+        await helper.locateAndTakeScreenShot(auxFunc,
+            'body > main > div.section.cta-banner.blue-banner > div > div > div > a',
+            'YL-Explore-the-docs.png')
+        // const explore = page.locator('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
+        // expect(await explore.screenshot()).toMatchSnapshot('YL-Explore-the-docs.png');
 
         //Company dropdown Visual Test
         await page.click('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
-
-        //? Force wait for 1 sec to have full popup as expected
-        await helper.delay(1000)
-
-        expect(await page.screenshot()).toMatchSnapshot('YL-Explore-the-docs-Page.png')
-        
+        await helper.delay(1500)
+        await helper.pageScreenShot('YL-Explore-the-docs-Page.png')
+        // expect(await page.screenshot()).toMatchSnapshot('YL-Explore-the-docs-Page.png')  
     })
 
-    test('16 - Single Element - Contact Page ', async ({ page }) => {
-
+    test.only('16 - Single Element - Contact Page ', async ({ page }) => {
        //Scroll down to find the button
         for(let i = 0; i < 6; i++) {
             await page.keyboard.down('PageDown');
         }
         
-        const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a')
-        expect(await explore.screenshot()).toMatchSnapshot('YL-ContactUs-button.png');
+        await helper.locateAndTakeScreenShot(auxFunc,
+            '#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a',
+            'YL-ContactUs-button.png')
+        // const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a')
+        // expect(await explore.screenshot()).toMatchSnapshot('YL-ContactUs-button.png');
 
         //Company dropdown Visual Test
         await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a')
         await helper.delay(1000)
-        expect(await page.screenshot()).toMatchSnapshot('YL-ContactUs-Page.png')
-        
+        await helper.multipleScreenShot('YL-ContactUs-Page', 2)
+        // await helper.pageScreenShot('YL-ContactUs-Page.png')
+        // // expect(await page.screenshot()).toMatchSnapshot('YL-ContactUs-Page.png')
+        // await page.keyboard.down('PageDown');
+        // await helper.delay(1000)
+        // await helper.pageScreenShot('YL-ContactUs-Page2.png')
     })
 
-    test('17 - Single Element - Partners page ', async ({ page }) => {
-
+    test.only('17 - Single Element - Partners page ', async ({ page }) => {
         //Scroll down to find the button
          for(let i = 0; i < 6; i++) {
              await page.keyboard.down('PageDown');
          }
-         
-         const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(2) > a')
-         expect(await explore.screenshot()).toMatchSnapshot('YL-Partners-button.png');
+         await helper.locateAndTakeScreenShot(auxFunc,
+            '#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(2) > a',
+            'YL-Partners-button.png')
+        //  const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(2) > a')
+        //  expect(await explore.screenshot()).toMatchSnapshot('YL-Partners-button.png');
  
          //Company dropdown Visual Test
          await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(2) > a')
          await helper.delay(1000)
 
-         //! Need to take screen shot from the whole page
-         expect(await page.screenshot()).toMatchSnapshot('YL-Partners-Page.png')
-         
+         await helper.multipleScreenShot('YL-Partners-Page', 3)
+        //  await helper.pageScreenShot('YL-Partners-Page.png')
+        // // expect(await page.screenshot()).toMatchSnapshot('YL-ContactUs-Page.png')
+        //  await page.keyboard.down('PageDown');
+        //  await helper.delay(1000)
+        //  await helper.pageScreenShot('YL-Partners-Page2.png')
+        //  await page.keyboard.down('PageDown');
+        //  await helper.delay(1000)
+        //  await helper.pageScreenShot('YL-Partners-Page3.png')
      })
 
      test('18 - Single Element - Merchant page ', async ({ page }) => {
-
         //Scroll down to find the button
          for(let i = 0; i < 6; i++) {
              await page.keyboard.down('PageDown');
          }
-         
-         const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(3) > a')
-         expect(await explore.screenshot()).toMatchSnapshot('YL-Merchant-Businesses-button.png');
+         await helper.locateAndTakeScreenShot(auxFunc,
+            '#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(3) > a',
+            'YL-Merchant-Businesses-button.png')
+        //  const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(3) > a')
+        //  expect(await explore.screenshot()).toMatchSnapshot('YL-Merchant-Businesses-button.png');
  
          //Company dropdown Visual Test
          await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(3) > a')
          await helper.delay(1000)
-         expect(await page.screenshot()).toMatchSnapshot('YL-Merchant-Page.png')
-         
+         await helper.pageScreenShot('YL-Merchant-Page.png')
+        //  expect(await page.screenshot()).toMatchSnapshot('YL-Merchant-Page.png')
      })
-
-
 })

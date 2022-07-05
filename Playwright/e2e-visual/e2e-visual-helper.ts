@@ -6,11 +6,13 @@ export class VisualHelper {
   readonly page: Page;
   readonly helper: Page;
   readonly locator: Locator;
+  readonly i;
 
   constructor(page: Page) {
     this.page = page;
     this.helper = this.helper;
     this.locator = this.locator;
+    this.i = this.i;
   }
 
   //*Staging functions ---------------------- 
@@ -171,6 +173,13 @@ export class VisualHelper {
         expect(await auxFunc.screenshot()).toMatchSnapshot(`${fileName}`);
   }
 
+  async multipleScreenShot(name, times, i = this.i, page = this.page){
+    for(i = 1; i <= times; i++){
+      await this.pageScreenShot(name +i+ '.png')
+      await page.keyboard.down('PageDown');
+      await this.delay(1000)
+    }
+  }
 }
 
 
