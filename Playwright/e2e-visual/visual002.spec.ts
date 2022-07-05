@@ -73,7 +73,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
 
         await helper.languageCheck(partner);
         helper.delay(2000);
-        
+
         await partnerClass.partnerCredential(partner);
 
         await helper.auth0screenShot(partner)
@@ -84,11 +84,12 @@ test.describe("Partner Dashboard Visual Regression", () => {
         helper.delay(2500);
 
         await helper.partnerPageScreenShot(partner)
-       
+  
       }
     );
   });
 });
+
 
 
 

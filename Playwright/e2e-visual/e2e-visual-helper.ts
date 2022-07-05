@@ -139,7 +139,7 @@ export class VisualHelper {
   }
 
   async partnerPageScreenShot(partner, page =  this.page) {
-    this.delay(2000);
+    this.delay(3000);
     expect(await this.page.screenshot()).toMatchSnapshot(
       `YL-${partner}-page.png`
     );
