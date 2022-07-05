@@ -1,17 +1,20 @@
-import { Page, expect } from "@playwright/test";
+import { Page, expect, Locator } from "@playwright/test";
 
 
 
 export class VisualHelper {
   readonly page: Page;
   readonly helper: Page;
+  readonly locator: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.helper = this.helper;
+    this.locator = this.locator;
   }
 
-  
+  //*Staging functions ---------------------- 
+
   async loadHomePage(env) {
     switch (env) {
       case "staging":
@@ -32,6 +35,10 @@ export class VisualHelper {
 
       case "production":
         await this.page.goto("https://www.youlend.com/apply/");
+        break;
+
+      case "youlend":
+        await this.page.goto("https://www.youlend.com");
         break;
 
       default:
@@ -146,7 +153,23 @@ export class VisualHelper {
     this.delay(1000);
   }
 
-  
+  //*Prod functions --------------------------- 
+
+  async closeCookiesProd(delay = 1000){
+    await this.page.click('body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--238105223 > div > a')
+    await this.delay(delay)
+  }
+
+  async pageScreenShot(fileName , page =  this.page) {
+    expect(await this.page.screenshot()).toMatchSnapshot(
+      `${fileName}`
+    );
+  }
+
+  async locateAndTakeScreenShot(auxFunc, locator, fileName, page =  this.page){
+    auxFunc = page.locator(`${locator}`)
+        expect(await auxFunc.screenshot()).toMatchSnapshot(`${fileName}`);
+  }
 
 }
 
