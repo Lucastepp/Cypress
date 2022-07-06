@@ -1,6 +1,6 @@
 import test, { expect, Locator, Page } from "@playwright/test";
 import { PartnerDashboard } from "../partner-dashboard-users";
-import { VisualHelper } from "../e2e-visual/e2e-visual-helper";
+import { VisualHelper } from "./e2e-visual-helper";
 
 let helper: VisualHelper;
 let partnerClass: PartnerDashboard;
@@ -33,22 +33,8 @@ test.describe("Partner Dashboard Visual Regression", () => {
 
   ];
 
-  const jubilee = [
-    "dashboard",
-    "google",
-    "loanguru",
-    "dojo",
-    "inspirepayments",
-    "rms",
-    "shopify",
-    "paymentsense",
-    "brainpoint-be/be-fr",
-    "boloo/be-fr"
-  ]
 
-  //* Make sure to change environment on forEach Loop below >>
-
-   jubilee.forEach((partner) => {
+   staging.forEach((partner) => {
 
     test.beforeEach(async ({ page }) => {
     helper = new VisualHelper(page)
@@ -60,12 +46,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
       async ({ page }) => {
 
         //* staging
-        //await helper.loadEnv(partner, "staging")
-
-        //*Jubilee
-        await helper.loadEnv(partner, "jubilee")
-
-
+        await helper.loadEnv(partner, "staging")
         await page.click("body > div > div > a");
         helper.delay(2000);
 
@@ -80,9 +61,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
       async ({ page }) => {
 
          //* staging
-        //await helper.loadEnv(partner, "staging")
-        //*Jubilee
-        await helper.loadEnv(partner, "jubilee")
+         await helper.loadEnv(partner, "staging")
 
         helper.delay(2000);
         expect(page.url()).toContain(`${partner}/signup`);
@@ -93,20 +72,15 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 03 - Printing Login button and Login in on  = [ " + partner + " ]",
       async ({ page }) => {
 
-         //*Staging
-        //await helper.loadEnv(partner, "staging")
-        //*Jubilee
-        await helper.loadEnv(partner, "jubilee")
+        //*Staging
+        await helper.loadEnv(partner, "staging")
+  
 
         //*.............................................
         await helper.languageCheck(partner, "youlend-dev");
         helper.delay(2000);
 
-        //* USE FOR STAGING */
-       // await partnerClass.partnerCredential(partner);
-
-        //* USE FOR JUBILEE */
-        await partnerClass.partnerCredentialJubilee(partner);
+        await partnerClass.partnerCredentialStaging(partner);
 
         await helper.auth0screenShot(partner)
         await helper.clickToLogin()
