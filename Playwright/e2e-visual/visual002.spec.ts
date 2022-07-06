@@ -7,7 +7,8 @@ let partnerClass: PartnerDashboard;
 
 
 test.describe("Partner Dashboard Visual Regression", () => {
-  const partners = [
+  const staging = [
+    "loanguru",
     "justeat",
     "shopify",
     "paymentsense",
@@ -29,9 +30,25 @@ test.describe("Partner Dashboard Visual Regression", () => {
     "tide",
     "wedoaccounting",
     "brainpoint-be/be-fr",
+
   ];
 
-   partners.forEach((partner) => {
+  const jubilee = [
+    "dashboard",
+    "google",
+    "loanguru",
+    "dojo",
+    "inspirepayments",
+    "rms",
+    "shopify",
+    "paymentsense",
+    "brainpoint-be/be-fr",
+    "boloo/be-fr"
+  ]
+
+  //* Make sure to change environment on forEach Loop below >>
+
+   jubilee.forEach((partner) => {
 
     test.beforeEach(async ({ page }) => {
     helper = new VisualHelper(page)
@@ -42,8 +59,13 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 01 - Login In on Partner  = [ " + partner + " ]",
       async ({ page }) => {
 
-        await helper.loadEnv(partner, "staging")
-       
+        //* staging
+        //await helper.loadEnv(partner, "staging")
+
+        //*Jubilee
+        await helper.loadEnv(partner, "jubilee")
+
+
         await page.click("body > div > div > a");
         helper.delay(2000);
 
@@ -57,32 +79,39 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 02 - Checking page of Partner  = [ " + partner + " ]",
       async ({ page }) => {
 
-        await helper.loadEnv(partner, "staging")
+         //* staging
+        //await helper.loadEnv(partner, "staging")
+        //*Jubilee
+        await helper.loadEnv(partner, "jubilee")
 
         helper.delay(2000);
         expect(page.url()).toContain(`${partner}/signup`);
       }
     );
 
-    test(
+    test.only(
       " 03 - Printing Login button and Login in on  = [ " + partner + " ]",
       async ({ page }) => {
 
-        await helper.loadEnv(partner, "staging")
-        //*.............................................
+         //*Staging
+        //await helper.loadEnv(partner, "staging")
+        //*Jubilee
+        await helper.loadEnv(partner, "jubilee")
 
-        await helper.languageCheck(partner);
+        //*.............................................
+        await helper.languageCheck(partner, "youlend-dev");
         helper.delay(2000);
 
-        await partnerClass.partnerCredential(partner);
+        //* USE FOR STAGING */
+       // await partnerClass.partnerCredential(partner);
+
+        //* USE FOR JUBILEE */
+        await partnerClass.partnerCredentialJubilee(partner);
 
         await helper.auth0screenShot(partner)
-
         await helper.clickToLogin()
-
         await helper.closePopup()
         helper.delay(2500);
-
         await helper.partnerPageScreenShot(partner)
   
       }

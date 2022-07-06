@@ -21,14 +21,12 @@ export class VisualHelper {
     switch (env) {
       case "staging":
         return "https://staging.youlend.com/apply/"
-        
-
-      case "stag-internal":
-        await this.page.goto("https://staging.ylinternal.com/apply/");
-        break;
 
       case "jubilee":
-        await this.page.goto("https://jubilee.dev-ylinternal.com/apply/");
+        return "https://jubilee.dev-youlend.com/apply/"
+        
+      case "stag-internal":
+        await this.page.goto("https://staging.ylinternal.com/apply/");
         break;
 
       case "jub-internal":
@@ -65,10 +63,10 @@ export class VisualHelper {
     this.delay(2000);
   } 
 
-  async languageCheck(partner, page =  this.page){
+  async languageCheck(partner, env = "youlend-stag", page =  this.page){
     let helper = new VisualHelper(this.page)
 
-    if (partner === "brainpoint-be/be-fr") {
+    if (partner === "brainpoint-be/be-fr" || partner === "boloo/be-fr") {
       const loginButton = page.locator(
         "body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control"
       );
@@ -82,7 +80,7 @@ export class VisualHelper {
       helper.delay(1500);
 
       await page.click("text=Connexion");
-      expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+      expect(page.url()).toContain(`https://${env}.eu.auth0.com/`);
 
       helper.delay(2000);
 
@@ -94,7 +92,7 @@ export class VisualHelper {
         `YL-${partner}Login-Button.png`
       );
       await page.click("text=Inloggen");
-      expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+      expect(page.url()).toContain(`https://${env}.eu.auth0.com/`);
 
       helper.delay(2000);
 
@@ -108,7 +106,7 @@ export class VisualHelper {
       await page.click(
         "body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control"
       );
-      expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+      expect(page.url()).toContain(`https://${env}.eu.auth0.com/`);
 
       helper.delay(2000);
      
@@ -121,7 +119,7 @@ export class VisualHelper {
       await page.click("text=Loginperson >> span");
 
       helper.delay(1000);
-      expect(page.url()).toContain("https://youlend-stag.eu.auth0.com/");
+      expect(page.url()).toContain(`https://${env}.eu.auth0.com/`);
 
     }
   }
@@ -178,8 +176,14 @@ export class VisualHelper {
     for(i = 1; i <= times; i++){
       await this.pageScreenShot(name +i+ '.png')
       await page.keyboard.down('PageDown');
-      await this.delay(1000)
+      await this.delay(1500)
     }
+  }
+
+  async pageDown(times = 1, page = this.page, i = this.i){
+    for( i = 0; i < times; i++) {
+      await page.keyboard.down('PageDown');
+  }
   }
 }
 
