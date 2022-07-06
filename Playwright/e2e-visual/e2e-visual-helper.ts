@@ -81,10 +81,43 @@ export class VisualHelper {
 
       await page.click("text=Connexion");
       expect(page.url()).toContain(`https://${env}.eu.auth0.com/`);
-
       helper.delay(2000);
 
-    } else if (partner === "brainpoint-be" || partner === "boloo/nl") {
+      }else if (partner === "dashboard/es"){
+        const loginButton = page.locator(
+          "body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control > span"
+        );
+  
+        helper.delay(500);
+  
+        expect(await loginButton.screenshot()).toMatchSnapshot(
+          `YL-${partner}Login-Button.png`
+        );
+  
+        helper.delay(1500);
+  
+        await page.click("text=Acceso");
+        expect(page.url()).toContain(`https://${env}.eu.auth0.com/`);
+        helper.delay(2000);
+
+      }else if (partner === "dashboard/de"){
+        const loginButton = page.locator(
+          "body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control > span"
+        );
+        helper.delay(500);
+  
+        expect(await loginButton.screenshot()).toMatchSnapshot(
+          `YL-${partner}Login-Button.png`
+        );
+  
+        helper.delay(1500);
+  
+        await page.click("text=Anmeldung");
+        expect(page.url()).toContain(`https://${env}.eu.auth0.com/`);
+  
+        helper.delay(2000);
+
+    } else if (partner === "brainpoint-be" || partner === "boloo/nl" || partner === "dashboard/nl") {
       const loginButton = page.locator(
         "body > app-root > yl-header > mat-toolbar > div > div.user-controls > div.user-account-control"
       );

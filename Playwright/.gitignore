@@ -10,5 +10,6 @@ user.json
 YL-user.json
 /backpus/partner-dashboard-users-old.ts
 /backpus/partner-dashboard-users.ts
-/e2e-visual/visual002.spec.ts-snapshots/
+/e2e-visual/Jubilee-visual-dashboard.spec.ts-snapshots/
+/e2e-visual/Stag-visual-dashboard.spec.ts-snapshots/
 /e2e-visual/visual001.spec.ts-snapshots/

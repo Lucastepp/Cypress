@@ -8,29 +8,31 @@ let partnerClass: PartnerDashboard;
 
 test.describe("Partner Dashboard Visual Regression", () => {
   const staging = [
-    "loanguru",
-    "justeat",
-    "shopify",
-    "paymentsense",
-    "rms",
-    "dojo",
-    "google",
-    "mastercard",
-    "takepayments",
-    "ebayuk",
-    "kinex",
-    "payu/pl",
-    "swoop",
-    "boloo/nl",
-    "foodhub",
-    "eposnowcapital",
-    "fundingcircle",
-    "hdp", //handepay
-    "paypoint",
-    "tide",
-    "wedoaccounting",
-    "brainpoint-be/be-fr",
-
+    // "loanguru",
+    // "justeat",
+    // "shopify",
+    // "paymentsense",
+    // "rms",
+    // "dojo",
+    // "google",
+    // "mastercard",
+    // "takepayments",
+    // "ebayuk",
+    // "kinex",
+    // "payu/pl",
+    // "swoop",
+    // "boloo/nl",
+    // "foodhub",
+    // "eposnowcapital",
+    // "fundingcircle",
+    // "hdp", //handepay
+    // "paypoint",
+    // "tide",
+    // "wedoaccounting",
+    // "brainpoint-be/be-fr",
+    "dashboard/de",
+    "dashboard/es",
+    "dashboard/nl"
   ];
 
 
@@ -68,7 +70,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
       }
     );
 
-    test.only(
+    test(
       " 03 - Printing Login button and Login in on  = [ " + partner + " ]",
       async ({ page }) => {
 
@@ -77,7 +79,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
   
 
         //*.............................................
-        await helper.languageCheck(partner, "youlend-dev");
+        await helper.languageCheck(partner, "youlend-stag");
         helper.delay(2000);
 
         await partnerClass.partnerCredentialStaging(partner);

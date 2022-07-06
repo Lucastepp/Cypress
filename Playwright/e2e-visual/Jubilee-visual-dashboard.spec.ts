@@ -43,7 +43,14 @@ test.describe("Partner Dashboard Visual Regression", () => {
     "shopify",
     "paymentsense",
     "brainpoint-be/be-fr",
-    "boloo/be-fr"
+    "boloo/be-fr",
+    "foodhub",
+    "kinex",
+    "fundingcircle",
+    "payu/pl",
+    "justeat",
+    "tide"
+
   ]
 
   //* Make sure to change environment on forEach Loop below >>
