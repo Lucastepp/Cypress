@@ -7,32 +7,7 @@ let partnerClass: PartnerDashboard;
 
 
 test.describe("Partner Dashboard Visual Regression", () => {
-  const staging = [
-    "loanguru",
-    "justeat",
-    "shopify",
-    "paymentsense",
-    "rms",
-    "dojo",
-    "google",
-    "mastercard",
-    "takepayments",
-    "ebayuk",
-    "kinex",
-    "payu/pl",
-    "swoop",
-    "boloo/nl",
-    "foodhub",
-    "eposnowcapital",
-    "fundingcircle",
-    "hdp", //handepay
-    "paypoint",
-    "tide",
-    "wedoaccounting",
-    "brainpoint-be/be-fr",
-
-  ];
-
+ 
   const jubilee = [
     "dashboard",
     "google",
@@ -66,9 +41,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 01 - Login In on Partner  = [ " + partner + " ]",
       async ({ page }) => {
 
-        //*Jubilee
         await helper.loadEnv(partner, "jubilee")
-
 
         await page.click("body > div > div > a");
         helper.delay(2000);
@@ -101,7 +74,6 @@ test.describe("Partner Dashboard Visual Regression", () => {
         helper.delay(2000);
 
         await partnerClass.partnerCredentialJubilee(partner);
-
         await helper.auth0screenShot(partner)
         await helper.clickToLogin()
         await helper.closePopup()

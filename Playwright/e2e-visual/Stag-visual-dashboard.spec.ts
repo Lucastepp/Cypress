@@ -8,28 +8,28 @@ let partnerClass: PartnerDashboard;
 
 test.describe("Partner Dashboard Visual Regression", () => {
   const staging = [
-    // "loanguru",
-    // "justeat",
-    // "shopify",
-    // "paymentsense",
-    // "rms",
-    // "dojo",
-    // "google",
-    // "mastercard",
-    // "takepayments",
-    // "ebayuk",
-    // "kinex",
-    // "payu/pl",
-    // "swoop",
-    // "boloo/nl",
-    // "foodhub",
-    // "eposnowcapital",
-    // "fundingcircle",
-    // "hdp", //handepay
-    // "paypoint",
-    // "tide",
-    // "wedoaccounting",
-    // "brainpoint-be/be-fr",
+    "loanguru",
+    "justeat",
+    "shopify",
+    "paymentsense",
+    "rms",
+    "dojo",
+    "google",
+    "mastercard",
+    "takepayments",
+    "ebayuk",
+    "kinex",
+    "payu/pl",
+    "swoop",
+    "boloo/nl",
+    "foodhub",
+    "eposnowcapital",
+    "fundingcircle",
+    "hdp", //handepay
+    "paypoint",
+    "tide",
+    "wedoaccounting",
+    "brainpoint-be/be-fr",
     "dashboard/de",
     "dashboard/es",
     "dashboard/nl"
@@ -47,7 +47,6 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 01 - Login In on Partner  = [ " + partner + " ]",
       async ({ page }) => {
 
-        //* staging
         await helper.loadEnv(partner, "staging")
         await page.click("body > div > div > a");
         helper.delay(2000);
@@ -62,9 +61,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 02 - Checking page of Partner  = [ " + partner + " ]",
       async ({ page }) => {
 
-         //* staging
-         await helper.loadEnv(partner, "staging")
-
+        await helper.loadEnv(partner, "staging")
         helper.delay(2000);
         expect(page.url()).toContain(`${partner}/signup`);
       }
@@ -74,16 +71,13 @@ test.describe("Partner Dashboard Visual Regression", () => {
       " 03 - Printing Login button and Login in on  = [ " + partner + " ]",
       async ({ page }) => {
 
-        //*Staging
         await helper.loadEnv(partner, "staging")
-  
 
         //*.............................................
         await helper.languageCheck(partner, "youlend-stag");
         helper.delay(2000);
 
         await partnerClass.partnerCredentialStaging(partner);
-
         await helper.auth0screenShot(partner)
         await helper.clickToLogin()
         await helper.closePopup()
