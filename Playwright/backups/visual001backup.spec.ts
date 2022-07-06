@@ -10,7 +10,7 @@ test.describe("Visual Regression YouLend Page", () => {
     test.beforeEach(async ({ page }) => {
        
         helper = new VisualHelper(page)
-
+        //await page.goto('https://youlend.com/')
         await helper.loadHomePage("youlend")
         //Closing cookies pop-up // default delay afterwards is 1000ms
         await helper.closeCookiesProd()
@@ -18,21 +18,26 @@ test.describe("Visual Regression YouLend Page", () => {
 
     test('0 - Full Page Snapshot', async ({ page }) => {
         await helper.pageScreenShot('0 - youlend-homepage.png')
-
+        //expect(await page.screenshot()).toMatchSnapshot('youlend-homepage.png')
     })
 
     test('1 - Single Element - YL Logo', async ({ page }) => {
         //Logo Visual Test
         await helper.locateAndTakeScreenShot(auxFunc, '#nav > div > div > div.nav-left > a > img', '1 - YL-logo.png')
+        // const logo = page.locator('#nav > div > div > div.nav-left > a > img')
+        // expect(await logo.screenshot()).toMatchSnapshot('YL-logo.png');
     })
 
     test('2 - Single Element - Products ', async ({ page }) => {
         //Products button Visual Test
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-toggle-0', '2 - YL-products.png')
-
+        // const products = page.locator('#w-dropdown-toggle-0')
+        // expect(await products.screenshot()).toMatchSnapshot('YL-products.png');
         //Products Dropdown Visual Test
         await page.click('#w-dropdown-toggle-0 > div')
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-list-0', '2 - YL-prod-dropdown.png')
+        // const prodDropdown = page.locator('#w-dropdown-list-0')
+        // expect(await prodDropdown.screenshot()).toMatchSnapshot('YL-prod-dropdown.png');
 
         //? Dropdown OVERVIEW
         await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2)')
@@ -52,11 +57,13 @@ test.describe("Visual Regression YouLend Page", () => {
     test('3 - Single Element - Use Cases ', async ({ page }) => {
         //Use Cases button Visual Test
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-toggle-1', '3 - YL-UseCases.png')
-
+        // const UseCases = page.locator('#w-dropdown-toggle-1')
+        // expect(await UseCases.screenshot()).toMatchSnapshot('YL-UseCases.png');
         //Use Cases dropdown Visual Test
         await page.click('#w-dropdown-toggle-1')
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-list-1', '3 - YL-UseCases-dropdown.png')
-
+        // const UseCasesDrop = page.locator('#w-dropdown-list-1')
+        // expect(await UseCasesDrop.screenshot()).toMatchSnapshot('YL-UseCases-dropdown.png');
 
         //* Dropdown USE CASES
         //await page.click('#w-dropdown-toggle-1')
@@ -120,10 +127,14 @@ test.describe("Visual Regression YouLend Page", () => {
     test('5 - Single Element - Company ', async ({ page }) => {
         //Company button Visual Test
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-toggle-3', '5 - YL-Company.png')
+        // const company = page.locator('#w-dropdown-toggle-3')
+        // expect(await company.screenshot()).toMatchSnapshot('YL-Company.png');
 
         //Company dropdown Visual Test
         await page.click('#w-dropdown-toggle-3')
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-list-3', '5 - YL-company-dropdown.png')
+        // const companyDrop = page.locator('#w-dropdown-list-3')
+        // expect(await companyDrop.screenshot()).toMatchSnapshot('YL-company-dropdown.png');
 
         //* Dropdown COMPANY
         //? Dropdown OVERVIEW
@@ -148,18 +159,25 @@ test.describe("Visual Regression YouLend Page", () => {
     })
 
     test('6 - Single Element - Login ', async ({ page }) => {
+
         //Login button Visual Test
         await helper.locateAndTakeScreenShot(
             auxFunc, 
             '#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button', 
             '6 - YL-LoginButton.png')
+        // const login = page.locator('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button')
+        // expect(await login.screenshot()).toMatchSnapshot('YL-LoginButton.png');
 
         await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white__ghost.btn-nav.w-button')
 
         expect(page.url()).toContain("https://youlend.com/apply/dashboard/login");
-          await helper.delay(3500);
-          await helper.pageScreenShot(`6 - YL-Auth0-page.png`)
 
+          await helper.delay(3000);
+
+          await helper.pageScreenShot(`6 - YL-Auth0-page.png`)
+        //   expect(await page.screenshot()).toMatchSnapshot(
+        //     `YL-Auth0-page.png`
+        //   );
     })
     
     test('7 - Single Element - Seeking Funding ', async ({ page }) => {
@@ -168,6 +186,8 @@ test.describe("Visual Regression YouLend Page", () => {
             auxFunc, 
             '#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button', 
             '7 - YL-SeekingFunding.png')
+        // const seeking = page.locator('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button')
+        // expect(await seeking.screenshot()).toMatchSnapshot('YL-SeekingFunding.png');
 
         //Checking Seeking Funding Page Visual Test
         await page.click('#nav > div > div > div.nav-right > div.nav-buttons > a.btn.btn-white.btn-nav.w-button')
@@ -176,15 +196,20 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.delay(1500)
 
         await helper.locateAndTakeScreenShot(auxFunc, 'body', '7 - YL-SeekingF-Page.png')
+        // const SeekingFundPage = page.locator('body')
+        // expect(await SeekingFundPage.screenshot()).toMatchSnapshot('YL-SeekingF-Page.png');
     })
 
 
     test('8 - Single Element - Capital ', async ({ page }) => {
+
         //Company button Visual Test
         await page.keyboard.down('PageDown')
         await helper.locateAndTakeScreenShot(auxFunc, 
             'body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(1) > div',
             '8 - YL-Capital-card.png')
+        // const capital = await page.locator('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(1) > div')
+        // expect(await capital.screenshot()).toMatchSnapshot('YL-Capital-card.png');
 
         //Company dropdown Visual Test
         await page.click('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(1) > div > div > a')
@@ -192,7 +217,7 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.delay(1000)
 
         await helper.pageScreenShot('8 - YL-capital-page.png')
-
+        // expect(await page.screenshot()).toMatchSnapshot('YL-capital-page.png')
     })
 
     test('9 - Single Element - Instant Payouts ', async ({ page }) => {
@@ -201,9 +226,11 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc,
              'body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div',
              '9 - YL-InstantPayouts-card.png')
-
+        // const instant = await page.locator('body > main > section:nth-child(3) > div > div.grid-2-col > div:nth-child(2) > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-InstantPayouts-card.png');
         await helper.delay(1000)
         await helper.pageScreenShot('9 - YL-InstantPayouts-page.png')
+        //expect(await page.screenshot()).toMatchSnapshot('YL-InstantPayouts-page.png') 
     })
 
     test('10 - Single Element - Why partner w/ YouLend Cards', async ({ page }) => {
@@ -214,6 +241,8 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc,
             'body > main > section:nth-child(4) > div',
             '10 - YL-Why-partner-cards.png')
+        // const instant = await page.locator('body > main > section:nth-child(4) > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-Why-partner-cards.png');
 
         //Company dropdown Visual Test
         await page.click('#w-node-_06f7f875-6196-adb6-a649-8a97c10d5dfc-c10d5dda > div > div > a')
@@ -231,13 +260,15 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc,
             'body > main > section:nth-child(5) > div > div',
             '11 - YL-Embedded finance card.png')
+        // const instant = await page.locator('body > main > section:nth-child(5) > div > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-Embedded finance card.png');
 
         //Company dropdown Visual Test
         await page.click('#w-node-_91a2e957-94d5-4799-2fca-b4d736a54c04-36a54bff > div > a')
 
         await helper.delay(1500)
         await helper.pageScreenShot('11 - YL-EmbbededFinance-page.png')
-
+        // expect(await page.screenshot()).toMatchSnapshot('YL-EmbbededFinance-page.png')  
     })
 
     test('12 - Single Element - Less Cash, more possitibily', async ({ page }) => {
@@ -248,12 +279,14 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc,
             'body > main > section.section.white > div',
             'YL-Less-cash-card.png')
+        // const instant = await page.locator('body > main > section.section.white > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-Less-cash-card.png');
 
         //Company dropdown Visual Test
         await page.click('#w-node-_050e9792-cdd7-9df1-c39b-9b440b7570a3-0b7570a0 > div > a')
         await helper.delay(1500)
         await helper.pageScreenShot('12 - YL-lessCash-whitepaper-page.png')
-
+        // expect(await page.screenshot()).toMatchSnapshot('YL-lessCash-whitepaper-page.png')
     })
 
     test('13 - Single Element - Recent Blog Posts', async ({ page }) => {
@@ -264,13 +297,15 @@ test.describe("Visual Regression YouLend Page", () => {
 
         await helper.locateAndTakeScreenShot(auxFunc,
             'body > main > section:nth-child(8) > div',
-            '13 - YL-Recent-Blog-Card.png')                               
+            '13 - YL-Recent-Blog-Card.png')
+        // const instant = await page.locator('body > main > section:nth-child(8) > div')
+        // expect(await instant.screenshot()).toMatchSnapshot('YL-Recent-Blog-Card.png');
 
         //Company dropdown Visual Test
         await page.click('body > main > section:nth-child(8) > div > div.title-block.has-button > a')
         await helper.delay(1500)
         await helper.pageScreenShot('13 - YL-Recent-Blog-page.png')
-      
+        // expect(await page.screenshot()).toMatchSnapshot('YL-Recent-Blog-page.png')
     })
 
     test('14 - Single Element - Book a Demo ', async ({ page }) => {
@@ -279,7 +314,8 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc,
             'body > main > div.section.hero > div > div > div.hero-content > div',
             '14 - YL-Book-a-Demo.png')
-
+        // const book = page.locator('body > main > div.section.hero > div > div > div.hero-content > div')
+        // expect(await book.screenshot()).toMatchSnapshot('YL-Book-a-Demo.png');
 
         //Company dropdown Visual Test
         await page.click('body > main > div.section.hero > div > div > div.hero-content > div')
@@ -287,7 +323,8 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc,
             'body > div.popup-modal > div',
             '14 - YL-Book-a-Demo-Popup.png') 
-        
+        // const bookPage = page.locator('body > div.popup-modal > div')
+        // expect(await bookPage.screenshot()).toMatchSnapshot('YL-Book-a-Demo-Popup.png');
     })
 
     test('15 - Single Element - Explore the Docs ', async ({ page }) => {
@@ -299,12 +336,14 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc,
             'body > main > div.section.cta-banner.blue-banner > div > div > div > a',
             '15 - YL-Explore-the-docs.png')
+        // const explore = page.locator('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
+        // expect(await explore.screenshot()).toMatchSnapshot('YL-Explore-the-docs.png');
 
         //Company dropdown Visual Test
         await page.click('body > main > div.section.cta-banner.blue-banner > div > div > div > a')
         await helper.delay(1500)
         await helper.pageScreenShot('15 - YL-Explore-the-docs-Page.png')
-
+        // expect(await page.screenshot()).toMatchSnapshot('YL-Explore-the-docs-Page.png')  
     })
 
     test('16 - Single Element - Contact Page ', async ({ page }) => {
@@ -316,11 +355,18 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc,
             '#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a',
             '16 - YL-ContactUs-button.png')
+        // const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a')
+        // expect(await explore.screenshot()).toMatchSnapshot('YL-ContactUs-button.png');
 
         //Company dropdown Visual Test
         await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(4) > a')
         await helper.delay(1000)
         await helper.multipleScreenShot('16 - YL-ContactUs-Page', 2)
+        // await helper.pageScreenShot('YL-ContactUs-Page.png')
+        // // expect(await page.screenshot()).toMatchSnapshot('YL-ContactUs-Page.png')
+        // await page.keyboard.down('PageDown');
+        // await helper.delay(1000)
+        // await helper.pageScreenShot('YL-ContactUs-Page2.png')
     })
 
     test('17 - Single Element - Partners page ', async ({ page }) => {
@@ -331,12 +377,22 @@ test.describe("Visual Regression YouLend Page", () => {
          await helper.locateAndTakeScreenShot(auxFunc,
             '#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(2) > a',
             '17 - YL-Partners-button.png')
-
+        //  const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(2) > a')
+        //  expect(await explore.screenshot()).toMatchSnapshot('YL-Partners-button.png');
+ 
          //Company dropdown Visual Test
          await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(2) > a')
          await helper.delay(1000)
 
          await helper.multipleScreenShot('17 - YL-Partners-Page', 4)
+        //  await helper.pageScreenShot('YL-Partners-Page.png')
+        // // expect(await page.screenshot()).toMatchSnapshot('YL-ContactUs-Page.png')
+        //  await page.keyboard.down('PageDown');
+        //  await helper.delay(1000)
+        //  await helper.pageScreenShot('YL-Partners-Page2.png')
+        //  await page.keyboard.down('PageDown');
+        //  await helper.delay(1000)
+        //  await helper.pageScreenShot('YL-Partners-Page3.png')
      })
 
      test('18 - Single Element - Merchant page ', async ({ page }) => {
@@ -347,10 +403,13 @@ test.describe("Visual Regression YouLend Page", () => {
          await helper.locateAndTakeScreenShot(auxFunc,
             '#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c499-72a5c472 > ul > li:nth-child(3) > a',
             '18 - YL-Merchant-Businesses-button.png')
-     
+        //  const explore = page.locator('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(3) > a')
+        //  expect(await explore.screenshot()).toMatchSnapshot('YL-Merchant-Businesses-button.png');
+ 
          //Company dropdown Visual Test
          await page.click('#w-node-ed9ab0e0-cdfa-1189-0d53-2f4272a5c479-72a5c472 > ul > li:nth-child(3) > a')
          await helper.delay(1000)
          await helper.pageScreenShot('18 - YL-Merchant-Page.png')
+        //  expect(await page.screenshot()).toMatchSnapshot('YL-Merchant-Page.png')
      })
 })

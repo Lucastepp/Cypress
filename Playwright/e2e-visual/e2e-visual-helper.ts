@@ -15,7 +15,7 @@ export class VisualHelper {
     this.i = this.i;
   }
 
-  //*Staging functions ---------------------- 
+  //*------------------Staging functions ---------------------- 
 
   async loadHomePage(env) {
     switch (env) {
@@ -155,7 +155,7 @@ export class VisualHelper {
     this.delay(1000);
   }
 
-  //*Prod functions --------------------------- 
+  //*--------------------Prod functions --------------------------- 
 
   async closeCookiesProd(delay = 1000){
     await this.page.click('body > div.cc-window.cc-floating.cc-type-info.cc-theme-classic.cc-bottom.cc-right.cc-color-override--238105223 > div > a')
@@ -170,6 +170,7 @@ export class VisualHelper {
 
   async locateAndTakeScreenShot(auxFunc, locator, fileName, page =  this.page){
     auxFunc = page.locator(`${locator}`)
+        await this.delay(1000)
         expect(await auxFunc.screenshot()).toMatchSnapshot(`${fileName}`);
   }
 
