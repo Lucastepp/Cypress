@@ -170,12 +170,14 @@ export class VisualHelper {
     await page.click(
       "#auth0-lock-container-1 > div > div.auth0-lock-center > form > div > div > div > button > span"
     );
+    this.delay(1000);
   }
   
   async closePopup(page = this.page){
     await page.click(
       "body > div > div > a"
     );
+    this.delay(1000);
   }
 
   async partnerPageScreenShot(partner, page =  this.page) {

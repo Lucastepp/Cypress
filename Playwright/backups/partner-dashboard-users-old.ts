@@ -1,115 +1,158 @@
-import { Page } from '@playwright/test'
+import { Page } from "@playwright/test";
 
-export async function partnerCredential(partner, page) {
+export class PartnerDashboard {
+  readonly page: Page;
 
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  async partnerFunc(email: string) {
+    await this.page.click("input[name='email']");
+    await this.page.keyboard.type(email);
+    await this.page.click("input[name='password']");
+    await this.page.keyboard.type("Password1!!");
+  }
+
+  //*********** STAGING ***************
+
+  async partnerCredentialStaging(partner: string) {
     switch (partner) {
-        case "justeat":
-          await page.keyboard.type("lucas.pinto+0276@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "shopify":
-          await page.keyboard.type("lucas.pinto+0278@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "paymentsense":
-          await page.keyboard.type("lucas.pinto+0279@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "rms":
-          await page.keyboard.type("lucas.pinto+0280@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "dojo":
-          await page.keyboard.type("lucas.pinto+0281@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "google":
-          await page.keyboard.type("lucas.pinto+0282@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "mastercard":
-          await page.keyboard.type("lucas.pinto+0283@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "takepayments":
-          await page.keyboard.type("lucas.pinto+0284@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "ebayuk":
-          await page.keyboard.type("lucas.pinto+0285@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "kinex":
-          await page.keyboard.type("lucas.pinto+0286@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "payu/pl":
-          await page.keyboard.type("lucas.pinto+0287@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "swoop":
-          await page.keyboard.type("lucas.pinto+0288@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "boloo/nl":
-          await page.keyboard.type("lucas.pinto+0291@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "foodhub":
-          await page.keyboard.type("lucas.pinto+0292@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "eposnowcapital":
-          await page.keyboard.type("lucas.pinto+0293@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "fundingcircle":
-          await page.keyboard.type("lucas.pinto+0294@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "hdp":
-          await page.keyboard.type("lucas.pinto+0295@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "paypoint":
-          await page.keyboard.type("lucas.pinto+0296@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "tide":
-          await page.keyboard.type("lucas.pinto+0297@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "wedoaccounting":
-          await page.keyboard.type("lucas.pinto+0298@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
-        case "brainpoint-be/be-fr":
-          await page.keyboard.type("lucas.pinto+0299@youlend.com");
-          await page.keyboard.down("Tab");
-          await page.keyboard.type("Password1!!");
-          break;
+      case "justeat":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "shopify":
+        await this.partnerFunc("lucas.pinto+0278@youlend.com");
+        break;
+      case "paymentsense":
+        await this.partnerFunc("lucas.pinto+0279@youlend.com");
+        break;
+      case "rms":
+        await this.partnerFunc("lucas.pinto+0280@youlend.com");
+        break;
+      case "dojo":
+        await this.partnerFunc("lucas.pinto+0281@youlend.com");
+        break;
+      case "google":
+        await this.partnerFunc("lucas.pinto+0282@youlend.com");
+        break;
+      case "mastercard":
+        await this.partnerFunc("lucas.pinto+0283@youlend.com");
+        break;
+      case "takepayments":
+        await this.partnerFunc("lucas.pinto+0284@youlend.com");
+        break;
+      case "ebayuk":
+        await this.partnerFunc("lucas.pinto+0285@youlend.com");
+        break;
+      case "kinex":
+        await this.partnerFunc("lucas.pinto+0286@youlend.com");
+        break;
+      case "payu/pl":
+        await this.partnerFunc("lucas.pinto+0287@youlend.com");
+        break;
+      case "swoop":
+        await this.partnerFunc("lucas.pinto+0288@youlend.com");
+        break;
+      case "boloo/nl":
+        await this.partnerFunc("lucas.pinto+0291@youlend.com");
+        break;
+      case "foodhub":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "eposnowcapital":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "fundingcircle":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "hdp":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "paypoint":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "tide":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "wedoaccounting":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "brainpoint-be/be-fr":
+        await this.partnerFunc("lucas.pinto+0276@youlend.com");
+        break;
+      case "loanguru":
+        await this.partnerFunc("lucas.pinto+0337@youlend.com");
+        break;
+      case "dashboard/de":
+        await this.partnerFunc("lucas.pinto+0341@youlend.com");
+        break;
+      case "dashboard/es":
+        await this.partnerFunc("lucas.pinto+0342@youlend.com");
+        break;
+      case "dashboard/nl":
+        await this.partnerFunc("lucas.pinto+0345@youlend.com");
+        break;
 
-        default:
-          throw Error("Partner Not Found!!!!");
-      }
+      default:
+        throw Error("Partner Not Found!!!!");
+    }
+  }
+
+  //*********** JUBILEE CREDENTIALS ***************
+
+  async partnerCredentialJubilee(partner: string) {
+    switch (partner) {
+      case "dashboard":
+        await this.partnerFunc("lucas.pinto+0217@youlend.com");
+        break;
+      case "dojo":
+        await this.partnerFunc("lucas.pinto+0218@youlend.com");
+        break;
+      case "loanguru":
+        await this.partnerFunc("lucas.pinto+0219@youlend.com");
+        break;
+      case "inspirepayments":
+        await this.partnerFunc("lucas.pinto+0220@youlend.com");
+        break;
+      case "google":
+        await this.partnerFunc("lucas.pinto+0221@youlend.com");
+        break;
+      case "rms":
+        await this.partnerFunc("lucas.pinto+0223@youlend.com");
+        break;
+      case "shopify":
+        await this.partnerFunc("lucas.pinto+0224@youlend.com");
+        break;
+      case "paymentsense":
+        await this.partnerFunc("lucas.pinto+0225@youlend.com");
+        break;
+      case "brainpoint-be/be-fr":
+        await this.partnerFunc("lucas.pinto+0226@youlend.com");
+        break;
+      case "boloo/be-fr":
+        await this.partnerFunc("lucas.pinto+0227@youlend.com");
+        break;
+      case "foodhub":
+        await this.partnerFunc("lucas.pinto+0228@youlend.com");
+        break;
+      case "kinex":
+        await this.partnerFunc("lucas.pinto+0229@youlend.com");
+        break;
+      case "fundingcircle":
+        await this.partnerFunc("lucas.pinto+0230@youlend.com");
+        break;
+      case "payu/pl":
+        await this.partnerFunc("lucas.pinto+0231@youlend.com");
+        break;
+      case "justeat":
+        await this.partnerFunc("lucas.pinto+0232@youlend.com");
+        break;
+      case "tide":
+        await this.partnerFunc("lucas.pinto+0233@youlend.com");
+        break;
+      default:
+        throw Error("Partner Not Found!!!!");
+    }
+  }
 }

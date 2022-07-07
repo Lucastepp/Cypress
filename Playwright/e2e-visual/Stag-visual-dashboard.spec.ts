@@ -5,10 +5,9 @@ import { VisualHelper } from "./e2e-visual-helper";
 let helper: VisualHelper;
 let partnerClass: PartnerDashboard;
 
-
 test.describe("Partner Dashboard Visual Regression", () => {
   const staging = [
-    "loanguru",
+    //"loanguru",
     "justeat",
     "shopify",
     "paymentsense",
@@ -21,18 +20,18 @@ test.describe("Partner Dashboard Visual Regression", () => {
     "kinex",
     "payu/pl",
     "swoop",
-    "boloo/nl",
-    "foodhub",
-    "eposnowcapital",
-    "fundingcircle",
-    "hdp", //handepay
-    "paypoint",
-    "tide",
-    "wedoaccounting",
-    "brainpoint-be/be-fr",
-    "dashboard/de",
-    "dashboard/es",
-    "dashboard/nl"
+    // "boloo/nl",
+    // "foodhub",
+    // "eposnowcapital",
+    // "fundingcircle",
+    // "hdp", //handepay
+    // "paypoint",
+    // "tide",
+    // "wedoaccounting",
+    // "brainpoint-be/be-fr",
+    // "dashboard/de",
+    // "dashboard/es",
+    // "dashboard/nl"
   ];
 
 
@@ -76,7 +75,6 @@ test.describe("Partner Dashboard Visual Regression", () => {
         //*.............................................
         await helper.languageCheck(partner, "youlend-stag");
         helper.delay(2000);
-
         await partnerClass.partnerCredentialStaging(partner);
         await helper.auth0screenShot(partner)
         await helper.clickToLogin()

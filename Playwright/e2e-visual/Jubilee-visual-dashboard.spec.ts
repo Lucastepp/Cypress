@@ -63,7 +63,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
       }
     );
 
-    test.only(
+    test(
       " 03 - Printing Login button and Login in on  = [ " + partner + " ]",
       async ({ page }) => {
 
