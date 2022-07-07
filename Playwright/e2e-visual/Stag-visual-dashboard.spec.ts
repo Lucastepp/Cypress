@@ -20,18 +20,18 @@ test.describe("Partner Dashboard Visual Regression", () => {
     "kinex",
     "payu/pl",
     "swoop",
-    // "boloo/nl",
-    // "foodhub",
-    // "eposnowcapital",
-    // "fundingcircle",
-    // "hdp", //handepay
-    // "paypoint",
-    // "tide",
-    // "wedoaccounting",
-    // "brainpoint-be/be-fr",
-    // "dashboard/de",
-    // "dashboard/es",
-    // "dashboard/nl"
+    "boloo/nl",
+    "foodhub",
+    "eposnowcapital",
+    "fundingcircle",
+    "hdp", //handepay
+    "paypoint",
+    "tide",
+    "wedoaccounting",
+    "brainpoint-be/be-fr",
+    "dashboard/de",
+    "dashboard/es",
+    "dashboard/nl"
   ];
 
 
