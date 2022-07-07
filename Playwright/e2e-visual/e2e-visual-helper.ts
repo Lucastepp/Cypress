@@ -231,6 +231,12 @@ export class VisualHelper {
     await page.click(selector)
     expect(page.url()).toContain(contain)
   }
+
+  async clickClickAndExpect(click, selector, contain, page = this.page) {
+    await page.click(click)
+    await page.click(selector)
+    expect(page.url()).toContain(contain)
+  }
 }
 
 
