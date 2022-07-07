@@ -220,6 +220,17 @@ export class VisualHelper {
       await page.keyboard.down('PageDown');
   }
   }
+
+  async clickAndExpect(selector, contain, page = this.page) {
+    await page.click(selector)
+    expect(page.url()).toContain(contain)
+  }
+
+  async hoverClickAndExpect(hover, selector, contain, page = this.page) {
+    await page.hover(hover)
+    await page.click(selector)
+    expect(page.url()).toContain(contain)
+  }
 }
 
 

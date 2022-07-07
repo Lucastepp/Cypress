@@ -27,7 +27,7 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc, '#nav > div > div > div.nav-left > a > img', '1 - YL-logo.png')
     })
 
-    test('2 - Single Element - Products ', async ({ page }) => {
+    test.only('2 - Single Element - Products ', async ({ page }) => {
         //Products button Visual Test
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-toggle-0', '2 - YL-products.png')
 
@@ -36,21 +36,28 @@ test.describe("Visual Regression YouLend Page", () => {
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-list-0', '2 - YL-prod-dropdown.png')
 
         //? Dropdown OVERVIEW
-        await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2)')
-        expect(page.url()).toContain("/products-overview")
+        await helper.clickAndExpect('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2)', "/products-overview")
+        // await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2)')
+        // expect(page.url()).toContain("/products-overview")
         
          //? Dropdown CAPITAL
-        await page.hover('#w-dropdown-toggle-0 > div')
-        await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div')
-        expect(page.url()).toContain("/products/capital")
+        await helper.hoverClickAndExpect('#w-dropdown-toggle-0 > div',
+         '#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div',
+          "/products/capital")
+        // await page.hover('#w-dropdown-toggle-0 > div')
+        // await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div')
+        // expect(page.url()).toContain("/products/capital")
 
          //? Dropdown INSTANT PAYOUTS
-         await page.hover('#w-dropdown-toggle-0 > div')
-         await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
-         expect(page.url()).toContain("/products/instant-payouts")   
+         await helper.hoverClickAndExpect('#w-dropdown-toggle-0 > div',
+         '#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div',
+         "/products/instant-payouts")
+        //  await page.hover('#w-dropdown-toggle-0 > div')
+        //  await page.click('#w-dropdown-list-0 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
+        //  expect(page.url()).toContain("/products/instant-payouts")   
     })
 
-    test('3 - Single Element - Use Cases ', async ({ page }) => {
+    test.only('3 - Single Element - Use Cases ', async ({ page }) => {
         //Use Cases button Visual Test
         await helper.locateAndTakeScreenShot(auxFunc, '#w-dropdown-toggle-1', '3 - YL-UseCases.png')
 
@@ -60,28 +67,41 @@ test.describe("Visual Regression YouLend Page", () => {
 
         //* Dropdown USE CASES
         //await page.click('#w-dropdown-toggle-1')
-        await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2) > div')
-        expect(page.url()).toContain("/use-cases-overview")
+        await helper.clickAndExpect('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2)', "/use-cases-overview")
+        // await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(2) > div')
+        // expect(page.url()).toContain("/use-cases-overview")
         
          //? Dropdown PAYMENT SERVICE PROVIDERS
-        await page.hover('#w-dropdown-toggle-1 > div')
-        await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div')
-        expect(page.url()).toContain("/use-cases/payment-service-providers")
+         await helper.hoverClickAndExpect('#w-dropdown-toggle-1 > div',
+         '#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div',
+         "/use-cases/payment-service-providers")
+        // await page.hover('#w-dropdown-toggle-1 > div')
+        // await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(3) > div')
+        // expect(page.url()).toContain("/use-cases/payment-service-providers")
 
          //? Dropdown E-COMMENCE & TECH
-         await page.hover('#w-dropdown-toggle-1 > div')
-         await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
-         expect(page.url()).toContain("/use-cases/ecommerce-and-tech")
+         await helper.hoverClickAndExpect('#w-dropdown-toggle-1 > div',
+         '#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div',
+         "/use-cases/ecommerce-and-tech")
+        //  await page.hover('#w-dropdown-toggle-1 > div')
+        //  await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(4) > div')
+        //  expect(page.url()).toContain("/use-cases/ecommerce-and-tech")
 
          //? Dropdown BROKERS
-         await page.hover('#w-dropdown-toggle-1 > div')
-         await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(5) > div')
-         expect(page.url()).toContain("/use-cases/brokers")
+         await helper.hoverClickAndExpect('#w-dropdown-toggle-1 > div',
+         '#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(5) > div',
+         "/use-cases/brokers")
+        //  await page.hover('#w-dropdown-toggle-1 > div')
+        //  await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(5) > div')
+        //  expect(page.url()).toContain("/use-cases/brokers")
 
           //? Dropdown BANKS
-          await page.hover('#w-dropdown-toggle-1 > div')
-          await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(6) > div')
-          expect(page.url()).toContain("/use-cases/banks")
+          await helper.hoverClickAndExpect('#w-dropdown-toggle-1 > div',
+         '#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(6) > div',
+         "/use-cases/banks")
+        //   await page.hover('#w-dropdown-toggle-1 > div')
+        //   await page.click('#w-dropdown-list-1 > div.dropdown-inner > div.dropdown-menu > a:nth-child(6) > div')
+        //   expect(page.url()).toContain("/use-cases/banks")
     })
 
     test('4 - Single Element - Resources ', async ({ page }) => {
