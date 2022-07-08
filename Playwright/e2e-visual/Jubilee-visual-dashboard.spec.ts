@@ -24,7 +24,12 @@ test.describe("Partner Dashboard Visual Regression", () => {
     "fundingcircle",
     "payu/pl",
     "justeat",
-    "tide"
+    "tide",
+    "paypoint",
+    "swoop",
+    "hdp",
+    "wedoaccounting",
+    "eposnowcapital"
 
   ]
 
