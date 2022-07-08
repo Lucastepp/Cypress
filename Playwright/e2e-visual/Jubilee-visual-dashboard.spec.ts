@@ -30,7 +30,6 @@ test.describe("Partner Dashboard Visual Regression", () => {
     "hdp",
     "wedoaccounting",
     "eposnowcapital"
-
   ]
 
   //* Make sure to change environment on forEach Loop below >>
@@ -47,13 +46,12 @@ test.describe("Partner Dashboard Visual Regression", () => {
       async ({ page }) => {
 
         await helper.loadEnv(partner, "jubilee")
-
         await page.click("body > div > div > a");
         helper.delay(2000);
-
-        expect(await page.screenshot()).toMatchSnapshot(
-          `YL-${partner}Signup-Landing-page.png`
-        );
+        await helper.pageScreenShot(`YL-${partner}Signup-Landing-page.png`)
+        // expect(await page.screenshot()).toMatchSnapshot(
+        //   `YL-${partner}Signup-Landing-page.png`
+        // );
       }
     );
 
@@ -62,7 +60,6 @@ test.describe("Partner Dashboard Visual Regression", () => {
       async ({ page }) => {
 
         await helper.loadEnv(partner, "jubilee")
-
         helper.delay(2000);
         expect(page.url()).toContain(`${partner}/signup`);
       }
@@ -74,7 +71,6 @@ test.describe("Partner Dashboard Visual Regression", () => {
 
         await helper.loadEnv(partner, "jubilee")
 
-        //*.............................................
         await helper.languageCheck(partner, "youlend-dev");
         helper.delay(2000);
 

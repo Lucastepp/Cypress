@@ -50,9 +50,10 @@ test.describe("Partner Dashboard Visual Regression", () => {
         await page.click("body > div > div > a");
         helper.delay(2000);
 
-        expect(await page.screenshot()).toMatchSnapshot(
-          `YL-${partner}Signup-Landing-page.png`
-        );
+        await helper.pageScreenShot(`YL-${partner}Signup-Landing-page.png`)
+        // expect(await page.screenshot()).toMatchSnapshot(
+        //   `YL-${partner}Signup-Landing-page.png`
+        // );
       }
     );
 
