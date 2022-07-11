@@ -82,7 +82,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
         await helper.closePopup()
         helper.delay(2500);
         await helper.partnerPageScreenShot(partner)
-  
+        helper.delay(1500);
       }
     );
   });

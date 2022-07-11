@@ -185,7 +185,7 @@ export class VisualHelper {
     expect(await this.page.screenshot()).toMatchSnapshot(
       `YL-${partner}-page.png`
     );
-    this.delay(1000);
+    this.delay(2000);
   }
 
   //*--------------------Prod functions --------------------------- 
