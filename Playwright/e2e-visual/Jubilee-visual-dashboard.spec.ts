@@ -78,9 +78,9 @@ test.describe("Partner Dashboard Visual Regression", () => {
         await helper.auth0screenShot(partner)
         await helper.clickToLogin()
         await helper.closePopup()
-        helper.delay(1500);
+        helper.delay(4500);
         await helper.partnerPageScreenShot(partner)
-        helper.delay(1500);
+        //helper.delay(1500);
   
       }
     );
