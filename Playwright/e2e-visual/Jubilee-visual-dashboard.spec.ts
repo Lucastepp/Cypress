@@ -49,9 +49,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
         await page.click("body > div > div > a");
         helper.delay(2000);
         await helper.pageScreenShot(`YL-${partner}Signup-Landing-page.png`)
-        // expect(await page.screenshot()).toMatchSnapshot(
-        //   `YL-${partner}Signup-Landing-page.png`
-        // );
+
       }
     );
 
@@ -81,18 +79,8 @@ test.describe("Partner Dashboard Visual Regression", () => {
         helper.delay(4500);
         await helper.partnerPageScreenShot(partner)
         //helper.delay(1500);
-  
       }
     );
   });
 });
 
-
-
-
-
- // helper = new VisualHelper(page)
-        // let site = await helper.loadHomePage("staging");
-        // await page.goto(site + partner + "/signup");
-
-        //
