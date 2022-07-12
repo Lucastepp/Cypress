@@ -1,7 +1,6 @@
 import { Page, expect, Locator } from "@playwright/test";
 
 
-
 export class VisualHelper {
   readonly page: Page;
   readonly helper: Page;

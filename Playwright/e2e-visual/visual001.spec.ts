@@ -5,7 +5,6 @@ let helper: VisualHelper;
 let auxFunc;
 let i;
 
-
 test.describe("Visual Regression YouLend Page", () => {
 
     test.beforeEach(async ({ page }) => {
@@ -126,7 +125,7 @@ test.describe("Visual Regression YouLend Page", () => {
         //? Dropdown CONTACT
         await helper.hoverClickAndExpect('#w-dropdown-toggle-3 > div','#w-dropdown-list-3 > div.dropdown-inner > div.dropdown-menu > a:nth-child(5) > div',
          "/company/contact")
-         
+
         //!Need to check how to check URL when opening new window >>
         //? Dropdown CAREERS - INVERTED WITH LAST DROPDOWN OPTION BECAUSE CAREERS BRINGS US TO LINKEDIN PAGE
         //await page.hover('#w-dropdown-toggle-3 > div')
