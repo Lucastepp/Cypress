@@ -184,7 +184,6 @@ export class VisualHelper {
     expect(await this.page.screenshot()).toMatchSnapshot(
       `YL-${partner}-page.png`
     );
-   
   }
 
   //*--------------------Prod functions --------------------------- 
