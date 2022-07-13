@@ -15,7 +15,8 @@
     "tests:e2e-visual-old": "playwright test --config=./backups/visual-old.config.ts --project=chromium",
     "tests:api": "playwright test --config=./api/api.config.ts --project=chromium",
     "test": "npx playwright test --config=./playwright.config.js",
-    "test:local": "BROWSERSTACK_LOCAL=true npx playwright test organic --config=./jubilee.config.js"
+    "test:local": "BROWSERSTACK_LOCAL=true npx playwright test organic --config=./jubilee.config.js",
+    "jenkins-server": "java -jar jenkins.war --httpPort=8080 --enable-future-java"
   },
   "devDependencies": {
     "@playwright/test": "^1.22.2",
