@@ -21,5 +21,12 @@
   "devDependencies": {
     "@playwright/test": "^1.22.2",
     "browserstack-local": "^1.4.8"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^8.4.0",
+    "chai": "^4.3.6",
+    "cucumber-html-reporter": "^5.5.0",
+    "playwright": "^1.23.3",
+    "prettier": "^2.7.1"
   }
 }
