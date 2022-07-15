@@ -16,10 +16,12 @@
     "tests:api": "playwright test --config=./api/api.config.ts --project=chromium",
     "test": "npx playwright test --config=./playwright.config.js",
     "test:local": "BROWSERSTACK_LOCAL=true npx playwright test organic --config=./jubilee.config.js",
-    "jenkins-server": "java -jar jenkins.war --httpPort=8080 --enable-future-java"
+    "jenkins-server": "java -jar jenkins.war --httpPort=8080 --enable-future-java",
+    "test:cucumber": "C:/Users/lucas/OneDrive/Desktop/ENG_DE_SOFTWARE/Projects/YouLend/Cypress-Playwright/Playwright/node_modules/.bin/cucumber-js --require cucumber.js --require step-definitions\\**\\*.js -f json:cucumber_report.json --publish-quiet"
   },
   "devDependencies": {
     "@playwright/test": "^1.22.2",
+    "@wdio/cli": "^7.20.5",
     "browserstack-local": "^1.4.8"
   },
   "dependencies": {
