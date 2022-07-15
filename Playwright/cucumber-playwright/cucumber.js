@@ -1,6 +1,6 @@
 const common = `
     --require setup/assertions.js
-    --require setup/hook.js
+    --require setup/hooks.js
     --require step-definitions/**/*.step.js
 `
 module.exports = {

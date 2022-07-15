@@ -14,3 +14,7 @@ YL-user.json
 /e2e-visual/Stag-visual-dashboard.spec.ts-snapshots/
 /e2e-visual/visual001.spec.ts-snapshots/
 jenkins.war
+/cucumber-playwright/node_modules/
+/cucumber-playwright/package.json
+/cucumber-playwright/package-lock.json
+

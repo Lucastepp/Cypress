@@ -17,7 +17,8 @@
     "test": "npx playwright test --config=./playwright.config.js",
     "test:local": "BROWSERSTACK_LOCAL=true npx playwright test organic --config=./jubilee.config.js",
     "jenkins-server": "java -jar jenkins.war --httpPort=8080 --enable-future-java",
-    "test:cucumber": "C:/Users/lucas/OneDrive/Desktop/ENG_DE_SOFTWARE/Projects/YouLend/Cypress-Playwright/Playwright/node_modules/.bin/cucumber-js --require cucumber.js --require step-definitions\\**\\*.js -f json:cucumber_report.json --publish-quiet"
+    "test:cucumberdesk": "C:/Users/lucas/OneDrive/Desktop/ENG_DE_SOFTWARE/Projects/YouLend/Cypress-Playwright/Playwright/node_modules/.bin/cucumber-js --require cucumber.js --require step-definitions\\**\\*.js -f json:cucumber_report.json --publish-quiet",
+    "test:cucumberlaptop": "C:/Repo/Cypress-Playwright/Playwright/node_modules/.bin/cucumber-js --require cucumber.js --require step-definitions\\**\\*.js -f json:cucumber_report.json --publish-quiet"
   },
   "devDependencies": {
     "@playwright/test": "^1.22.2",
@@ -27,6 +28,7 @@
   "dependencies": {
     "@cucumber/cucumber": "^8.4.0",
     "chai": "^4.3.6",
+    "cucumber": "^6.0.7",
     "cucumber-html-reporter": "^5.5.0",
     "playwright": "^1.23.3",
     "prettier": "^2.7.1"
