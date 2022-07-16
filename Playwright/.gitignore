@@ -17,4 +17,6 @@ jenkins.war
 /cucumber-playwright/node_modules/
 /cucumber-playwright/package.json
 /cucumber-playwright/package-lock.json
+./Angular-Masterclass/first-part/node_modules/
+
 
