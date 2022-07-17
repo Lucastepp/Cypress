@@ -1,11 +1,12 @@
 import { CoursesService } from './courses.service';
 import { TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('Courses Services', () => {
 
-    let coursesService: CoursesService;
+    let coursesService: CoursesService,
+        httpTestingController: HttpTestingController;
 
     beforeEach(() => {
 
@@ -17,9 +18,14 @@ describe('Courses Services', () => {
         });
 
         coursesService = TestBed.get(CoursesService);
+        httpTestingController = TestBed.get(HttpTestingController);
     });
 
     it('Should retrieve all courses', () => {
+        coursesService.findAllCourses()
+            .subscribe(courses => {
+                
 
+            })
     })
 })
