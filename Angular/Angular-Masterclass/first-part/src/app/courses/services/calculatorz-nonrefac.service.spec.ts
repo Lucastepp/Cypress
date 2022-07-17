@@ -4,14 +4,13 @@ import { LoggerService } from "./logger.service";
 
 describe('CalculatorService', () => {
 
-    it('Should add two numbers', () => {
+   
 
+    it('Should add two numbers', () => {
         //const logger = new LoggerService() // Removed cause it is best practice to use a fakespyobjct 
 
         const logger = jasmine.createSpyObj('LoggerService', ['log'])
-        
         //spyOn(logger, 'log'); Removed because there is a spy used on line 11 by Jasmine
-
         const calculator = new CalculatorService(logger);
 
         const result = calculator.add(2, 2);
@@ -38,6 +37,7 @@ describe('CalculatorService', () => {
         
         //pending();
     })
+
 
     it('NON REFACTORED CODE - Should subtract two numbers', () => {
 
