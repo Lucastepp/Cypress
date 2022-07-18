@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { COURSES } from '../../../../server/db-data';
+import { Course } from '../model/course';
 
 describe('Courses Services', () => {
 
@@ -21,6 +22,10 @@ describe('Courses Services', () => {
         coursesService = TestBed.inject(CoursesService);
         httpTestingController = TestBed.inject(HttpTestingController);
     });
+
+    afterEach(() => {
+        httpTestingController.verify();
+    })
 
     it('Should retrieve all courses', () => {
         coursesService.findAllCourses()
@@ -43,4 +48,52 @@ describe('Courses Services', () => {
         req.flush({payload: Object.values(COURSES)})
         
     })
+
+
+
+    it('Should find a course by id', () => {
+
+        coursesService.findCourseById(12)
+            .subscribe(course => {
+
+                expect(course).toBeTruthy('No courses returned');
+
+                expect(course.id).toBe(12, 'Incorrect id');
+                
+            });   
+        
+        const req = httpTestingController.expectOne('/api/courses/12');
+
+        expect(req.request.method).toEqual("GET");
+
+        req.flush(COURSES[12])
+
+    })
+
+    it('Should save the course data', () => {
+
+        const changes :Partial<Course> =  {titles:{description: 'Testing Course'}}
+
+        coursesService.saveCourse(12, changes)
+            .subscribe(course => {
+
+                expect(course.id).toBe(12)
+            });
+
+        const req = httpTestingController.expectOne('/api/courses/12');
+
+        expect(req.request.method).toEqual('PUT');
+
+        expect(req.request.body.titles.description)
+            .toEqual(changes.titles.description);
+
+        req.flush({
+            ...COURSES[12],
+            ...changes
+        })
+    })
+
+    
 })
+
+
