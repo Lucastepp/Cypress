@@ -36,6 +36,12 @@ export class VisualHelper {
         await this.page.goto("https://www.youlend.com/apply/");
         break;
 
+        case "youlend-webflow":
+        await this.page.goto('https://youlend-new.webflow.io/');
+        break;
+
+       
+
       case "youlend":
         await this.page.goto("https://www.youlend.com");
         break;
