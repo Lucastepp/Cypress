@@ -10,7 +10,7 @@ test.describe("Visual Regression YouLend Page", () => {
     test.beforeEach(async ({ page }) => {
         helper = new VisualHelper(page)
 
-        await helper.loadHomePage("youlend-webflow")
+        await helper.loadHomePage("youlend")
         //Closing cookies pop-up // default delay afterwards is 1000ms
         await helper.closeCookiesProd()
       });
