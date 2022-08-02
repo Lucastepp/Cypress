@@ -1,12 +1,13 @@
 import { Page, expect, Locator } from "@playwright/test";
-import { email } from '../e2e-yl/Organic-lead.spec';
+import { email, emailCount } from '../e2e-yl/Organic-lead.spec';
 
 export class VisualHelper {
   readonly page: Page;
   readonly helper: Page;
   readonly locator: Locator;
   readonly i;
-  emailCounter: any;
+
+  emailCountHelper = emailCount;
   email: string;
 
   constructor(page: Page) {
@@ -205,7 +206,7 @@ export class VisualHelper {
     await this.delay(delay);
   }
 
-  async closeCookiesJub(delay = 1000) {
+  async closeCookiesJub(delay = 2000) {
     await this.page.click(
       "body > div > div > a"
     );
@@ -254,15 +255,24 @@ export class VisualHelper {
   }
 
   async alreadyExist() {
-    if (await this.page.$$("text='An application already exists for this email address'")) {
-      await this.page.click("text='Dismiss'", {force:true})
+
+
+    const element = await this.page.$$("text='An application already exists for this email address'")
+
+    while(element && this.emailCountHelper <= emailCount){
+      await this.emailCountHelper++;
+    }
+
+    if (element.length) {
       await this.delay(3000)
-      this.emailCounter++;
+      await this.page.locator("text='Dismiss'").click();
+      await this.delay(1000)
+      await this.emailCountHelper++;
 
       expect(this.page.url()).toContain(`/signup`);
       await this.page.locator('input[name="name"]').fill("Lucas");
-      await this.page.locator('input[name="tel"]').fill("07503056563");
-      await this.page.locator('input[name="email"]').fill(email);
+      await this.page.locator('input[name="tel"]').fill("07503059999");
+      await this.page.locator('input[name="email"]').fill(`lucas.pinto+0${this.emailCountHelper +1}@youlend.com`);
       await this.page.locator('input[name="password"]').fill("Password1!");
       await this.page.locator('button[type="submit"]').click();
       await this.delay(2000)
