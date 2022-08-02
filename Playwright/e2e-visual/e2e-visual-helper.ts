@@ -294,6 +294,8 @@ export class VisualHelper {
           .locator('input[name="email"]')
           .fill(`lucas.pinto+0${this.emailCountHelper + 1}@youlend.com`);
 
+          console.log(`lucas.pinto+0${this.emailCountHelper}@youlend.com`)
+
         await this.page.locator('input[name="password"]').fill("Password1!");
         await this.page.locator('button[type="submit"]').click();
         await this.delay(4000);
