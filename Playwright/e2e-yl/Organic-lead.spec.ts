@@ -1,10 +1,10 @@
 import test, { expect, Locator, Page } from "@playwright/test";
-import { VisualHelper, emailCountHelper } from "../e2e-visual/e2e-visual-helper";
+import { VisualHelper } from "../e2e-visual/e2e-visual-helper";
 
 let page: Page;
 let helper: VisualHelper;
 
-export let emailCount = 1001;
+export let emailCount = 10010;
 export const email = `lucas.pinto+0${emailCount}@youlend.com`;
 
 test.describe.serial("Partner Dashboard Visual Regression", () => {
@@ -15,10 +15,10 @@ test.describe.serial("Partner Dashboard Visual Regression", () => {
 
       page = await browser.newPage();
       helper = new VisualHelper(page);
-      await helper.loadHomePage("signup-jubilee");
+      await helper.loadHomePage("signup-staging");
       await helper.delay(2000)
       await helper.closeCookiesJub()
-      await helper.delay(2000)
+      await helper.delay(1000)
     });
 
     test.beforeEach(async ({ }) => {
@@ -31,22 +31,22 @@ test.describe.serial("Partner Dashboard Visual Regression", () => {
       await page.locator('input[name="tel"]').fill("07503056563");
       await page.locator('input[name="email"]').fill(email);
       await page.locator('input[name="password"]').fill("Password1!");
-      await helper.delay(1000)
+      await helper.delay(2000)
       await page.locator('body > app-root > div > div > div.main-content > app-signup > form > div.d-flex.mt-56 > button > span.mat-button-wrapper').click();
    
       //await page.click('button[type="submit"]');
-      await helper.delay(1000)
-      await helper.alreadyExist()
-      await helper.delay(1000)
+      // await helper.delay(1000)
+      // await helper.alreadyExist()
+      // await helper.delay(1000)
     });
 
     test(" 02 - Getting Started", async ({}) => {
 
-      await helper.delay(3000)
-      if (await page.$$("text='An application already exists for this email address'")){
+      
         await helper.alreadyExist()
-      }
-      await helper.delay(3000)
+      
+
+      await helper.delay(1000)
       //expect(page.url()).toContain(`/gettingstarted`);
       await page.locator('button:has-text("Get startedarrow_forward")').click();
     });
@@ -76,7 +76,7 @@ test.describe.serial("Partner Dashboard Visual Regression", () => {
 
       await page
         .locator('input[formcontrolname="companyName"]')
-        .fill(`Test${emailCountHelper}`);
+        .fill(`Test${helper.emailCountHelper}`);
       await page.locator('input[formcontrolname="businessAddress"]').fill(`w2`);
       await page.locator("#cc_c2a > ul > li:nth-child(1) > div > span.light").click;
       await page.locator("#cc_c2a > ul > li:nth-child(1) > div > span.light").click;

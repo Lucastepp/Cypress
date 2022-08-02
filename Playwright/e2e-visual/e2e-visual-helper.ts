@@ -1,5 +1,5 @@
 import { Page, expect, Locator } from "@playwright/test";
-import { email, emailCount } from '../e2e-yl/Organic-lead.spec';
+import { email, emailCount } from "../e2e-yl/Organic-lead.spec";
 
 export class VisualHelper {
   readonly page: Page;
@@ -48,7 +48,15 @@ export class VisualHelper {
         break;
 
       case "signup-jubilee":
-        await this.page.goto("https://jubilee.dev-youlend.com/apply/dashboard/signup");
+        await this.page.goto(
+          "https://jubilee.dev-youlend.com/apply/dashboard/signup"
+        );
+        break;
+
+      case "signup-staging":
+        await this.page.goto(
+          "https://staging.youlend.com/apply/dashboard/signup"
+        );
         break;
 
       case "youlend":
@@ -207,9 +215,7 @@ export class VisualHelper {
   }
 
   async closeCookiesJub(delay = 2000) {
-    await this.page.click(
-      "body > div > div > a"
-    );
+    await this.page.click("body > div > div > a");
     await this.delay(delay);
   }
 
@@ -255,30 +261,32 @@ export class VisualHelper {
   }
 
   async alreadyExist() {
+    const element = await this.page.$$(
+      "text='An application already exists for this email address'"
+    );
+    const dismiss = await this.page.$$("text='Dismiss'");
 
-
-    const element = await this.page.$$("text='An application already exists for this email address'")
-
-    while(element && this.emailCountHelper <= emailCount){
+    while (element && this.emailCountHelper <= emailCount) {
       await this.emailCountHelper++;
     }
+    await this.delay(2000);
 
-    if (element.length) {
-      await this.delay(3000)
+    while (element) {
+      await this.delay(2000);
+
       await this.page.locator("text='Dismiss'").click();
-      await this.delay(1000)
+      await this.delay(1000);
       await this.emailCountHelper++;
 
       expect(this.page.url()).toContain(`/signup`);
       await this.page.locator('input[name="name"]').fill("Lucas");
       await this.page.locator('input[name="tel"]').fill("07503059999");
-      await this.page.locator('input[name="email"]').fill(`lucas.pinto+0${this.emailCountHelper +1}@youlend.com`);
+      await this.page
+        .locator('input[name="email"]')
+        .fill(`lucas.pinto+0${this.emailCountHelper + 1}@youlend.com`);
       await this.page.locator('input[name="password"]').fill("Password1!");
       await this.page.locator('button[type="submit"]').click();
-      await this.delay(2000)
-
-      
-
-    } 
+      await this.delay(2000);
+    }
   }
 }
