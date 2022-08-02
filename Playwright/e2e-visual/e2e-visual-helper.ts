@@ -264,29 +264,47 @@ export class VisualHelper {
     const element = await this.page.$$(
       "text='An application already exists for this email address'"
     );
-    const dismiss = await this.page.$$("text='Dismiss'");
 
-    while (element && this.emailCountHelper <= emailCount) {
-      await this.emailCountHelper++;
-    }
-    await this.delay(2000);
+    if (
+      await this.page.isVisible(
+        "body > app-root > div > div > div.main-content > yl-get-started > section > div > button > span.mat-button-wrapper > span"
+      )
+    ) {
+      await this.page.click(
+        "body > app-root > div > div > div.main-content > yl-get-started > section > div > button > span.mat-button-wrapper > span"
+      );
+    } else {
+      do {
+        console.log(element);
+        const dismiss = await this.page.$$("text='Dismiss'");
 
-    while (element) {
-      await this.delay(2000);
+        while (element && this.emailCountHelper <= emailCount) {
+          await this.emailCountHelper++;
+        }
+        await this.delay(2000);
 
-      await this.page.locator("text='Dismiss'").click();
-      await this.delay(1000);
-      await this.emailCountHelper++;
+        while (element) {
+          await this.delay(2000);
 
-      expect(this.page.url()).toContain(`/signup`);
-      await this.page.locator('input[name="name"]').fill("Lucas");
-      await this.page.locator('input[name="tel"]').fill("07503059999");
-      await this.page
-        .locator('input[name="email"]')
-        .fill(`lucas.pinto+0${this.emailCountHelper + 1}@youlend.com`);
-      await this.page.locator('input[name="password"]').fill("Password1!");
-      await this.page.locator('button[type="submit"]').click();
-      await this.delay(2000);
+          await this.page.locator("text='Dismiss'").click();
+          await this.delay(1000);
+          await this.emailCountHelper++;
+
+          expect(this.page.url()).toContain(`/signup`);
+          await this.page.locator('input[name="name"]').fill("Lucas");
+          await this.page.locator('input[name="tel"]').fill("07503059999");
+          await this.page
+            .locator('input[name="email"]')
+            .fill(`lucas.pinto+0${this.emailCountHelper + 1}@youlend.com`);
+          await this.page.locator('input[name="password"]').fill("Password1!");
+          await this.page.locator('button[type="submit"]').click();
+          await this.delay(2000);
+        }
+      } while (
+        await this.page.isVisible(
+          "body > app-root > div > div > div.main-content > yl-get-started > section > div > button > span.mat-button-wrapper > span"
+        )
+      );
     }
   }
 }
