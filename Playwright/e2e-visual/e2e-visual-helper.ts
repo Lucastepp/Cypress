@@ -261,50 +261,58 @@ export class VisualHelper {
   }
 
   async alreadyExist() {
-    const element = await this.page.$$(
-      "text='An application already exists for this email address'"
-    );
 
     if (
       await this.page.isVisible(
-        "body > app-root > div > div > div.main-content > yl-get-started > section > div > button > span.mat-button-wrapper > span"
+        "text='Let's get started with your application'"
       )
     ) {
-      await this.page.click(
-        "body > app-root > div > div > div.main-content > yl-get-started > section > div > button > span.mat-button-wrapper > span"
-      );
+      console.log('Get Started is visible');
+
+      await this.page.locator(
+        "body > app-root > div > div > div.main-content > yl-get-started > section > div > button > span.mat-button-wrapper"
+      ).click()
+
     } else {
       do {
-        console.log(element);
-        const dismiss = await this.page.$$("text='Dismiss'");
+        console.log('testing 1');
 
-        while (element && this.emailCountHelper <= emailCount) {
-          await this.emailCountHelper++;
-        }
+        // while (element && this.emailCountHelper <= emailCount) {
+        //   await this.emailCountHelper++;
+        // }
+        await this.delay(1000);
+
+
+        await this.page.locator("text='Dismiss'").click();
+        await this.delay(1000);
+        await this.emailCountHelper++;
+
+        expect(this.page.url()).toContain(`/signup`);
+        await this.page.locator('input[name="name"]').fill("Lucas");
+        await this.page.locator('input[name="tel"]').fill("07503059999");
+        await this.page
+          .locator('input[name="email"]')
+          .fill(`lucas.pinto+0${this.emailCountHelper + 1}@youlend.com`);
+
+        await this.page.locator('input[name="password"]').fill("Password1!");
+        await this.page.locator('button[type="submit"]').click();
+        await this.delay(4000);
+
+        console.log('testing 2');
         await this.delay(2000);
-
-        while (element) {
-          await this.delay(2000);
-
-          await this.page.locator("text='Dismiss'").click();
-          await this.delay(1000);
-          await this.emailCountHelper++;
-
-          expect(this.page.url()).toContain(`/signup`);
-          await this.page.locator('input[name="name"]').fill("Lucas");
-          await this.page.locator('input[name="tel"]').fill("07503059999");
-          await this.page
-            .locator('input[name="email"]')
-            .fill(`lucas.pinto+0${this.emailCountHelper + 1}@youlend.com`);
-          await this.page.locator('input[name="password"]').fill("Password1!");
-          await this.page.locator('button[type="submit"]').click();
-          await this.delay(2000);
-        }
       } while (
         await this.page.isVisible(
-          "body > app-root > div > div > div.main-content > yl-get-started > section > div > button > span.mat-button-wrapper > span"
+          
+          "text='Dismiss'"
         )
+        
       );
+      console.log('testing 3');
+
+      await this.delay(2000)
+      await this.page.locator(
+        "body > app-root > div > div > div.main-content > yl-get-started > section > div > button > span.mat-button-wrapper"
+      ).click()
     }
   }
 }

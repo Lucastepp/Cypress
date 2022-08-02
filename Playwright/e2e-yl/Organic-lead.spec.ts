@@ -4,7 +4,7 @@ import { VisualHelper } from "../e2e-visual/e2e-visual-helper";
 let page: Page;
 let helper: VisualHelper;
 
-export let emailCount = 10010;
+export let emailCount = 10027;
 export const email = `lucas.pinto+0${emailCount}@youlend.com`;
 
 test.describe.serial("Partner Dashboard Visual Regression", () => {
@@ -37,7 +37,7 @@ test.describe.serial("Partner Dashboard Visual Regression", () => {
       //await page.click('button[type="submit"]');
       // await helper.delay(1000)
       // await helper.alreadyExist()
-      // await helper.delay(1000)
+      await helper.delay(1000)
     });
 
     test(" 02 - Getting Started", async ({}) => {
@@ -48,28 +48,35 @@ test.describe.serial("Partner Dashboard Visual Regression", () => {
 
       await helper.delay(1000)
       //expect(page.url()).toContain(`/gettingstarted`);
-      await page.locator('button:has-text("Get startedarrow_forward")').click();
+      //await page.locator('button:has-text("Get startedarrow_forward")').click();
+   
     });
 
     test(" 03 - Company Details", async ({  }) => {
       expect(page.url()).toContain(`/companydetails`);
-      await page.locator("#mat-select-value-1").click;
+      await page.locator("#mat-select-0 > div > div.mat-select-arrow-wrapper.ng-tns-c51-1").click;
 
-      const locator = page.locator("#mat-select-0-panel");
-      await expect(locator).toContainText("United Kingdom");
-      await expect(locator).toContainText("Belgium");
-      await expect(locator).toContainText("Germany");
-      await expect(locator).toContainText("Ireland");
-      await expect(locator).toContainText("Netherlands");
-      await expect(locator).toContainText("Poland");
-      await expect(locator).toContainText("Spain");
+      await helper.delay(1000)
 
-      const companyType = page.locator("#mat-select-2-panel");
-      await expect(companyType).toContainText("Ltd");
-      await expect(companyType).toContainText("PLC");
-      await expect(companyType).toContainText("LLP");
-      await expect(companyType).toContainText("Sole Trader");
-      await expect(companyType).toContainText("Partnership");
+     
+      await expect(page.locator('#mat-option-6 > span')).toHaveText('United Kindgom');
+      await expect(page.locator('#mat-option-0 > span')).toHaveText("Belgium");
+      await expect(page.locator('#mat-option-1 > span')).toHaveText("Germany");
+      await expect(page.locator('#mat-option-2 > span')).toHaveText("Ireland");
+      await expect(page.locator('#mat-option-3 > span')).toHaveText("Netherlands");
+      await expect(page.locator('#mat-option-4 > span')).toHaveText("Poland");
+      await expect(page.locator('#mat-option-5 > span')).toHaveText("Spain");
+
+
+      await page.locator("#mat-select-value-2").click;
+      await helper.delay(1000)
+
+      
+      await expect(page.locator('#mat-option-7 > span')).toHaveText("Ltd");
+      await expect(page.locator('#mat-option-8 > span')).toHaveText("PLC");
+      await expect(page.locator('#mat-option-9 > span')).toHaveText("LLP");
+      await expect(page.locator('#mat-option-10 > span')).toHaveText("Sole Trader");
+      await expect(page.locator('#mat-option-11 > span')).toHaveText("Partnership");
 
       await page.locator("#mat-select-value-3 > span").click;
       await page.locator("#mat-option-10 > span").click;
