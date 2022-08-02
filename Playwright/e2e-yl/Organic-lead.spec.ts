@@ -1,39 +1,48 @@
 import test, { expect, Locator, Page } from "@playwright/test";
 import { VisualHelper } from "../e2e-visual/e2e-visual-helper";
 
+let page: Page;
 let helper: VisualHelper;
+let emailCount = 1001;
+export const email = `lucas.pinto+0${emailCount}@youlend.com`;
 
-let emailCount = 1000;
-const email = `lucas.pinto+0${emailCount}@youlend.com`;
-
-test.describe("Partner Dashboard Visual Regression", () => {
+test.describe.serial("Partner Dashboard Visual Regression", () => {
   //* Make sure to change environment on forEach Loop below >>
 
   do {
-    test.beforeAll(async ({ page }) => {
+    test.beforeAll(async ({ browser }) => {
+
+      page = await browser.newPage();
       helper = new VisualHelper(page);
       await helper.loadHomePage("signup-jubilee");
+      await helper.closeCookiesJub()
     });
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ }) => {
       helper = new VisualHelper(page);
     });
 
-    test(" 01 - Signup Page", async ({ page }) => {
+    test(" 01 - Signup Page", async ({ }) => {
       expect(page.url()).toContain(`/signup`);
       await page.locator('input[name="name"]').fill("Lucas");
       await page.locator('input[name="tel"]').fill("07503056563");
       await page.locator('input[name="email"]').fill(email);
       await page.locator('input[name="password"]').fill("Password1!");
-      await page.locator(".mat-button-wrapper").click;
+      await page.locator('button[type="submit"]').click();
+      await helper.delay(10000)
+      //await page.click('button[type="submit"]');
+
+      helper.alreadyExist()
+      await helper.delay(2000)
     });
 
-    test(" 02 - Getting Started", async ({ page }) => {
+    test(" 02 - Getting Started", async ({}) => {
+      await helper.delay(3000)
       expect(page.url()).toContain(`/gettingstarted`);
-      await page.locator(".mat-button-wrapper").click;
+      await page.locator(".mat-button-wrapper").click();
     });
 
-    test(" 03 - Company Details", async ({ page }) => {
+    test(" 03 - Company Details", async ({  }) => {
       expect(page.url()).toContain(`/companydetails`);
       await page.locator("#mat-select-value-1").click;
 
@@ -66,7 +75,7 @@ test.describe("Partner Dashboard Visual Regression", () => {
       await page.locator("#cc_c2a > ul > li:nth-child(1) > div > span.light").click;
     });
 
-    test(" 04 - Personal Details", async ({ page }) => {
+    test(" 04 - Personal Details", async ({ }) => {
       expect(page.url()).toContain(`/personaldetails`);
 
       await page.locator('input[formcontrolname="lastName"]').fill(`Pinto`);
@@ -86,14 +95,14 @@ test.describe("Partner Dashboard Visual Regression", () => {
         
     });
 
-    test(" 05 - Financial information", async ({ page }) => {
+    test(" 05 - Financial information", async ({}) => {
         expect(page.url()).toContain(`/financialinformation`);
   
         await page.locator("#mat-checkbox-1 > label > span.mat-checkbox-inner-container").click;
-        await page.locator("#drop-zone > input[type=file]").click;
+        await page.locator("input[type=file]").setInputFiles("./data/May 2019- April 2020.pdf")
 
+        await page.locator("body > app-root > div > div > div.main-content > yl-financial-information > section > div.d-flex > div > button > span.mat-button-wrapper > span").click;
         
-          
       });
 
 

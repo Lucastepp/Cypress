@@ -1,10 +1,13 @@
 import { Page, expect, Locator } from "@playwright/test";
+import { email } from '../e2e-yl/Organic-lead.spec';
 
 export class VisualHelper {
   readonly page: Page;
   readonly helper: Page;
   readonly locator: Locator;
   readonly i;
+  emailCounter: any;
+  email: string;
 
   constructor(page: Page) {
     this.page = page;
@@ -202,6 +205,13 @@ export class VisualHelper {
     await this.delay(delay);
   }
 
+  async closeCookiesJub(delay = 1000) {
+    await this.page.click(
+      "body > div > div > a"
+    );
+    await this.delay(delay);
+  }
+
   async pageScreenShot(fileName, page = this.page) {
     expect(await this.page.screenshot()).toMatchSnapshot(`${fileName}`);
   }
@@ -241,5 +251,24 @@ export class VisualHelper {
     await page.click(click);
     await page.click(selector);
     expect(page.url()).toContain(contain);
+  }
+
+  async alreadyExist() {
+    if (await this.page.$$("text='An application already exists for this email address'")) {
+      await this.page.click("text='Dismiss'", {force:true})
+      await this.delay(3000)
+      this.emailCounter++;
+
+      expect(this.page.url()).toContain(`/signup`);
+      await this.page.locator('input[name="name"]').fill("Lucas");
+      await this.page.locator('input[name="tel"]').fill("07503056563");
+      await this.page.locator('input[name="email"]').fill(email);
+      await this.page.locator('input[name="password"]').fill("Password1!");
+      await this.page.locator('button[type="submit"]').click();
+      await this.delay(2000)
+
+      
+
+    } 
   }
 }
